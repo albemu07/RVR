@@ -20,22 +20,12 @@ class msgThreads
         msgThreads(int sd, int id) : sd_(sd), id_(id), th_(&msgThreads::recieveMsg, this) {
         }
         ~msgThreads() {
-<<<<<<< HEAD
             std::cout << "Deataching thread: " << id_ << " " << std::this_thread::get_id() << "\n";
             th_.detach();
         }
         
         void recieveMsg() {
             while (true) {
-=======
-            std::cout << "Joining thread: " << id_ << " " << std::this_thread::get_id() << "\n";
-            th_.join();
-        }
-        
-        void recieveMsg() {
-            bool con = true;
-            while (con) {
->>>>>>> main
 
                 char buffer[MAX_BUFFER] = {};
 
@@ -75,12 +65,6 @@ class msgThreads
                     case 'd':
                         inp = "%F";
                         break;
-<<<<<<< HEAD
-=======
-                    case 'q':
-                        con = false;
-                        break;
->>>>>>> main
                     default:
                         if (sendto(sd_, "Comando no soportado", 20, 0,  &cliente, cliente_len) == -1){
                             std::cout << "Error send: " << errno <<  "\n";
@@ -177,11 +161,7 @@ int main(int argc, char *argv[]){
     while (keep){
         std::string line;
         std::getline(std::cin, line);
-<<<<<<< HEAD
         if (line[0] == 'q'){
-=======
-        if (line == "q"){
->>>>>>> main
             keep = false;
         }
     }
