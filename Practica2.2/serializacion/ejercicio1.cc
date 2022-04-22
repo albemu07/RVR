@@ -22,11 +22,26 @@ public:
     void to_bin()
     {
         //
+        _size = sizeof(int16_t) * 2;
+        _size += sizeof(char) * 80;
+        alloc_data(_size);
+        char *  _pointer = _data;
+        memcpy(_pointer, name, sizeof(char) * 80);
+        _pointer += sizeof(char) * 80;
+        memcpy(_pointer, &x, sizeof(int16_t));
+        _pointer += sizeof(int16_t);
+        memcpy(_pointer, &y, sizeof(int16_t));
     }
 
     int from_bin(char * data)
     {
         //
+        char *  _pointer = data;
+        memcpy(name, _pointer, sizeof(char) * 80);
+         _pointer += sizeof(char) * 80;
+        memcpy(&x, _pointer, sizeof(int16_t));
+        _pointer += sizeof(int16_t);
+        memcpy(&y, _pointer, sizeof(int16_t));
         return 0;
     }
 
@@ -48,6 +63,25 @@ int main(int argc, char **argv)
     // 3. Leer el fichero
     // 4. "Deserializar" en one_r
     // 5. Mostrar el contenido de one_r
+
+    one_w.to_bin();
+
+    int fd = open("./jugador.bin", O_CREAT | O_TRUNC | O_RDWR, 0666);
+
+    write(fd, one_w.data(), one_w.size());
+
+    close(fd);
+
+    char buffer[256];
+    fd = open("./jugador.bin", O_RDONLY);
+
+    read(fd, buffer, 256);
+
+    close(fd);
+
+    one_r.from_bin(buffer);
+
+    std::cout << one_r.name << " " << one_r.x << " " << one_r.y << "\n";
 
     return 0;
 }

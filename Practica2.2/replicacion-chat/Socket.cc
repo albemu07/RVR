@@ -2,11 +2,36 @@
 
 #include "Serializable.h"
 #include "Socket.h"
+#include <unistd.h>
 
 Socket::Socket(const char * address, const char * port):sd(-1)
 {
     //Construir un socket de tipo AF_INET y SOCK_DGRAM usando getaddrinfo.
     //Con el resultado inicializar los miembros sd, sa y sa_len de la clase
+    struct addrinfo hints;
+    memset(&hints, 0, sizeof(struct addrinfo));
+    hints.ai_flags    = AI_PASSIVE; //Devolver 0.0.0.0
+    hints.ai_family   = AF_INET; // IPv4
+    hints.ai_socktype = SOCK_DGRAM;
+
+    struct addrinfo* res;
+    int rc = getaddrinfo(address, port, &hints, &res);
+
+    if (rc != 0){
+        std::cout << "Error: " << gai_strerror(rc) << "\n";
+        freeaddrinfo(res);
+        return;
+    }
+
+    sd = socket(res->ai_family, res->ai_socktype, 0);
+
+    if (sd == -1){
+        std::cout << "Error socket: " << errno <<  "\n";
+        freeaddrinfo(res);
+        return;
+    }
+
+    bind();
 }
 
 int Socket::recv(Serializable &obj, Socket * &sock)
@@ -37,6 +62,18 @@ int Socket::send(Serializable& obj, const Socket& sock)
 {
     //Serializar el objeto
     //Enviar el objeto binario a sock usando el socket sd
+    struct sockaddr sa;
+    socklen_t sa_len = sizeof(struct sockaddr);
+
+    char buffer[obj.size()] = {};
+    memcpy(buffer, obj.data(), obj.size());
+
+    int st = sendto(sd, buffer, obj.size(), 0, (struct sockaddr *) &sa, sa_len);
+    if (st == -1){
+        std::cout << "Error send: " << errno <<  "\n";
+        close(sd);
+        return -1;
+    }
 }
 
 bool operator== (const Socket &s1, const Socket &s2)
@@ -44,6 +81,8 @@ bool operator== (const Socket &s1, const Socket &s2)
     //Comparar los campos sin_family, sin_addr.s_addr y sin_port
     //de la estructura sockaddr_in de los Sockets s1 y s2
     //Retornar false si alguno difiere
+    return (s1.sa.sa_family == s2.sa.sa_family && s1.sa.sa_data == s1.sa.sa_data
+    && s1.sd == s2.sd);
 };
 
 std::ostream& operator<<(std::ostream& os, const Socket& s)

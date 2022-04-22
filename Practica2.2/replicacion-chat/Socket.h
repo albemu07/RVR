@@ -21,7 +21,11 @@ class Serializable;
  *  sockaddr: familia (INET), dirección y puerto, ver ip(7) para comparar
  *  estructuras sockaddr_in. Deben comparar el tipo (sin_family), dirección
  *  (sin_addr.s_addr) y puerto (sin_port). La comparación de los campos puede
- *  realizarse con el operador == de los tipos básicos asociados.
+ *  realizarse con el operador == de los l objeto mediante Serializable::from_bin del interfaz.
+     *
+     *    @param sock que identificará al extremo que envía los datos si es
+     *    distinto de 0 se creará un objeto Socket con la dirección y puerto.
+     *tipos básicos asociados.
  */
 bool operator== (const Socket &s1, const Socket &s2);
 
@@ -73,11 +77,7 @@ public:
      *  Recibe un mensaje de aplicación
      *
      *    @param obj que recibirá los datos de la red. Se usará para la
-     *    reconstrucción del objeto mediante Serializable::from_bin del interfaz.
-     *
-     *    @param sock que identificará al extremo que envía los datos si es
-     *    distinto de 0 se creará un objeto Socket con la dirección y puerto.
-     *
+     *    reconstrucción de
      *    @return 0 en caso de éxito o -1 si error (cerrar conexión)
      */
     int recv(Serializable &obj, Socket * &sock);
