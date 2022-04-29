@@ -74,6 +74,7 @@ int Socket::send(Serializable& obj, const Socket& sock)
         close(sd);
         return -1;
     }
+    return 0;
 }
 
 bool operator== (const Socket &s1, const Socket &s2)

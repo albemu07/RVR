@@ -3,6 +3,8 @@
 #include <string.h>
 #include <vector>
 #include <memory>
+#include <iostream>
+#include <stdio.h>
 
 #include "Serializable.h"
 #include "Socket.h"
