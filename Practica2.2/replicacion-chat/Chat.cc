@@ -10,9 +10,9 @@ void ChatMessage::to_bin()
     char *  _pointer = _data;
     memcpy(_pointer, &type, sizeof(uint8_t));
     _pointer += sizeof(uint8_t);
-    memcpy(_pointer, &nick, sizeof(char) * 8);
+    memcpy(_pointer, nick.c_str(), sizeof(char) * 8);
     _pointer += sizeof(char) * 8;
-    memcpy(_pointer, &message, sizeof(char) * 80);
+    memcpy(_pointer, message.c_str(), sizeof(char) * 80);
 
     //Serializar los campos type, nick y message en el buffer _data
 }
@@ -26,14 +26,14 @@ int ChatMessage::from_bin(char * bobj)
     char *  _pointer = _data;
     memcpy(&type, _pointer, sizeof(uint8_t));
     _pointer += sizeof(uint8_t);
-    memcpy(&nick, _pointer, sizeof(char) * 8);
+    nick.resize(sizeof(char) * 8);
+    memcpy((void *)nick.c_str(), _pointer, sizeof(char) * 8);
     _pointer += sizeof(char) * 8;
-    memcpy(&message, _pointer, sizeof(char) * 80);
+    message.resize(sizeof(char) * 80);
+    memcpy((void *)message.c_str(), _pointer, sizeof(char) * 80);
     return 0;
 
     //Reconstruir la clase usando el buffer _data
-
-    return 0;
 }
 
 // -----------------------------------------------------------------------------
@@ -43,26 +43,26 @@ void ChatServer::do_messages()
 {
     while (true)
     {
-        std::unique_ptr<ChatMessage> msg;
+        ChatMessage msg;
         Socket * s;
-        int rv = socket.recv(*msg, s);
+        int rv = socket.recv(msg, s);
         std::unique_ptr<Socket> sock(s);
 
-        switch (msg->type)
+        switch (msg.type)
         {
-        case 0 :
+        case ChatMessage::MessageType::LOGIN :
             clients.push_back(std::move(sock));
             break;
-        case 1 :
+        case ChatMessage::MessageType::MESSAGE :
             for (int i = 0; i < clients.size(); i++){
-                if (sock != clients[i]){
-                    clients[i]->send(*msg, socket);
+                if (!(*sock == *clients[i])){
+                    socket.send(msg, *clients[i]);
                 };
             }
             break;
-        case 2 :
+        case ChatMessage::MessageType::LOGOUT :
             for (int index = 0; index < clients.size(); index++) {
-                if (clients[index] == sock){
+                if (*clients[index] == *sock){
                     clients.erase(clients.begin() + index);
                     break;
                 }
@@ -95,7 +95,6 @@ void ChatClient::login()
 
     ChatMessage em(nick, msg);
     em.type = ChatMessage::LOGIN;
-
     socket.send(em, socket);
 }
 
@@ -107,6 +106,7 @@ void ChatClient::logout()
     em.type = ChatMessage::LOGOUT;
 
     socket.send(em, socket);
+    close(socket.socketDesc());
 }
 
 void ChatClient::input_thread()
@@ -116,7 +116,12 @@ void ChatClient::input_thread()
         std::string msg;
         std::getline(std::cin, msg);
         ChatMessage em(nick, msg);
+        if(msg == "q"){
+            logout();
+            return;
+        }
         em.type = ChatMessage::MESSAGE;
+        socket.send(em, socket);
         // Leer stdin con std::getline
         // Enviar al servidor usando socket
     }
@@ -126,6 +131,10 @@ void ChatClient::net_thread()
 {
     while(true)
     {
+        ChatMessage em;
+        Socket* s;
+        socket.recv(em, s);
+        std::cout << em.nick.c_str() << ": " << em.message.c_str() << "\n";
         //Recibir Mensajes de red
         //Mostrar en pantalla el mensaje de la forma "nick: mensaje"
     }

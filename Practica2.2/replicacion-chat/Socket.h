@@ -112,6 +112,10 @@ public:
 
     friend bool operator== (const Socket &s1, const Socket &s2);
 
+    int socketDesc() {
+        return sd;
+    };
+
 protected:
 
     /**
