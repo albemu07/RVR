@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/almufer/proyectoFinal/build",
+  "command": "/usr/bin/g++    -g   -o CMakeFiles/project.dir/src/main.cpp.o -c /home/almufer/proyectoFinal/src/main.cpp",
+  "file": "/home/almufer/proyectoFinal/src/main.cpp"
+}
+]

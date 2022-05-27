@@ -1,0 +1,1 @@
+/usr/bin/g++  -g  -rdynamic CMakeFiles/project.dir/src/main.cpp.o  -o project  -lSDL2main -lSDL2 -lGL 
