@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "sdlutils/sdlutils_demo.h"
+#include "sdlutils_demo.h"
 
 int main(int ac, char **av) {
 	try {
