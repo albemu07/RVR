@@ -1,3 +1,0 @@
-/home/almufer/proyectoFinal/build/CMakeFiles/rebuild_cache.dir
-/home/almufer/proyectoFinal/build/CMakeFiles/edit_cache.dir
-/home/almufer/proyectoFinal/build/CMakeFiles/project.dir
