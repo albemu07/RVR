@@ -8,6 +8,8 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
 
+#include "Board.h"
+
 using namespace std;
 
 void Game::init() {
@@ -47,7 +49,7 @@ void Game::init() {
 
 	// a boolean to exit the loop
 	exit_ = false;
-
+	Board* b = new Board();
 	while (!exit_) {
 		Uint32 startTime = sdl->currRealTime();
 
@@ -66,7 +68,7 @@ void Game::init() {
 
 	// stop the music
 	//Music::haltMusic();
-
+	
 }
 
 void Game::handleInput() {
