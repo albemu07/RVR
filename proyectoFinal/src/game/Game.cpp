@@ -8,8 +8,6 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
 
-#include "Board.h"
-
 using namespace std;
 
 void Game::init() {
@@ -49,7 +47,7 @@ void Game::init() {
 
 	// a boolean to exit the loop
 	exit_ = false;
-	Board* b = new Board();
+	b = new Board();
 	while (!exit_) {
 		Uint32 startTime = sdl->currRealTime();
 
@@ -83,7 +81,7 @@ void Game::handleInput() {
 void Game::render() {
 	// clear screen
 	sdl->clearRenderer();
-
+	b->render();
 	// render Hello SDL
 	// helloSDL.render(x1, y1);
 	// if (x1 + helloSDL.width() > winWidth)

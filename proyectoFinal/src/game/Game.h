@@ -1,4 +1,5 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
+#include "Board.h"
 
 #pragma once
 
@@ -18,6 +19,7 @@ private:
     InputHandler* in;
     SDLUtils* sdl;
     SDL_Renderer* renderer;
+    Board* b;
     bool exit_ = false;
 };
 

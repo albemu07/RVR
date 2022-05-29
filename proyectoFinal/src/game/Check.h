@@ -6,12 +6,6 @@ class InputHandler;
 class SDLUtils;
 class SDL_Renderer;
 
-struct Cell{
-    //bool pisada
-    //bool nextMove
-    //Ficha ficha
-};
-
 class Check {  
 public:
     void init(void);
