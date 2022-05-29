@@ -1,22 +1,25 @@
 // This file is part of the course TPV2@UCM - Samir Genaim
-
 #pragma once
 
 class InputHandler;
 class SDLUtils;
 class SDL_Renderer;
+class Texture;
+class Vector2D;
 
 class Check {  
 public:
+    Check(bool white, int x, int y);
+    ~Check();
     void init(void);
-private:
     void handleInput(void);
     void render(void);
     void update(void);
     void refresh(void);
 
+private:
     InputHandler* in;
-    SDLUtils* sdl;
-    SDL_Renderer* renderer;
-    bool exit_ = false;
+    SDLUtils* sdl;   
+    Texture* text;
+    Vector2D* pos;
 };

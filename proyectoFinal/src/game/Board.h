@@ -8,20 +8,24 @@ class SDLUtils;
 class SDL_Renderer;
 class Texture;
 
+
 struct Cell{
     //bool pisada
     bool marked;
     //bool nextMove
     bool nextMove;
     //Ficha ficha
-    Check check;
+    Check* check;
 };
 
 class Board {
     //Matriz casillas
     Cell board[8][8];
-    
+    Check* whites[12];
+    Check* blacks[12];
 public:
+    Board(){};
+    ~Board();
     void init(void);
     void handleInput(void);
     void render(void);
@@ -31,8 +35,6 @@ private:
     
     InputHandler* in;
     SDLUtils* sdl;
-    SDL_Renderer* renderer;
     Board* b;
-    bool exit_ = false;
     Texture* text;
 };
