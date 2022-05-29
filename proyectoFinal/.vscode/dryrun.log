@@ -1,7 +1,16 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/almufer/proyectoFinal'
+ 
+g++ -std=c++17 -Wall -g -o obj/main.o -c src/main.cpp
+g++ -std=c++17 -Wall -g -o obj/sdlutils/SoundEffect.o -c src/sdlutils/SoundEffect.cpp
+g++ -std=c++17 -Wall -g -o obj/sdlutils/Texture.o -c src/sdlutils/Texture.cpp
+g++ -std=c++17 -Wall -g -o obj/sdlutils/SDLUtils.o -c src/sdlutils/SDLUtils.cpp
+g++ -std=c++17 -Wall -g -o obj/sdlutils/sdlutils_demo.o -c src/sdlutils/sdlutils_demo.cpp
+g++ -std=c++17 -Wall -g -o obj/json/json_demo.o -c src/json/json_demo.cpp
+g++ -std=c++17 -Wall -g -o obj/json/JSONValue.o -c src/json/JSONValue.cpp
+g++ -std=c++17 -Wall -g -o obj/json/JSON.o -c src/json/JSON.cpp
+g++ -std=c++17 -Wall -g -o obj/utils/Vector2D.o -c src/utils/Vector2D.cpp
+g++ -std=c++17 -Wall -g -o obj/utils/Collisions.o -c src/utils/Collisions.cpp
+g++ -std=c++17 -Wall -g -o damas obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/sdlutils/sdlutils_demo.o obj/json/json_demo.o obj/json/JSONValue.o obj/json/JSON.o obj/utils/Vector2D.o obj/utils/Collisions.o -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
 make: Leaving directory '/home/almufer/proyectoFinal'
  
-src/main.o:1: warning: NUL character seen; rest of line ignored
-src/main.o:1: *** missing separator.  Stop.
-

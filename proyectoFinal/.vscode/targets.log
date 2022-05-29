@@ -1,7 +1,4 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
-src/main.o:1: warning: NUL character seen; rest of line ignored
-src/main.o:1: *** missing separator.  Stop.
-
 # GNU Make 4.2.1
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
@@ -9,7 +6,7 @@ src/main.o:1: *** missing separator.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Sat May 28 19:26:57 2022
+# Make data base, printed on Sun May 29 11:48:25 2022
 
 # Variables
 
@@ -22,7 +19,7 @@ WSLENV = ELECTRON_RUN_AS_NODE/w:WT_SESSION::WT_PROFILE_ID
 # default
 .SHELLFLAGS := -c
 # makefile (from 'Makefile', line 35)
-OBJ = $(patsubst $(SRCDIR)/%$(EXT),$(SRCDIR)/%.o,$(SRC))
+OBJ = $(patsubst $(SRCDIR)/%$(EXT),$(OBJDIR)/%.o,$(SRC))
 # makefile (from 'Makefile', line 33)
 SRC = $(wildcard $(SRCDIR)/*$(EXT)) $(wildcard $(SRCDIR)/*/*$(EXT))
 # environment
@@ -31,7 +28,7 @@ VSCODE_LOG_NATIVE = false
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
-# makefile (from 'Makefile', line 53)
+# makefile (from 'Makefile', line 49)
 EXE = .exe
 # automatic
 @F = $(notdir $@)
@@ -39,15 +36,15 @@ EXE = .exe
 CURDIR := /home/almufer/proyectoFinal
 # makefile
 SHELL = /bin/sh
-# makefile (from 'Makefile', line 45)
+# makefile (from 'Makefile', line 41)
 RM = rm
 # environment
 VSCODE_NLS_CONFIG = {"locale":"es","availableLanguages":{"*":"es"},"_languagePackId":"125a9a608456aa5e8a25d0a18c7b1d68.es","_translationsConfigFile":"/root/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/tcf.json","_cacheRoot":"/root/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es","_resolvedLanguagePackCoreLocation":"/root/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5","_corruptedFile":"/root/.vscode-server/data/clp/125a9a608456aa5e8a25d0a18c7b1d68.es/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /mnt/c/Users/almuf/AppData/Local/Programs/Microsoft VS Code/bin/code
-# makefile (from 'src/main.o', line 1)
-MAKEFILE_LIST :=  Makefile src/main.o
-# environment
+# makefile (from 'main.d', line 1)
+MAKEFILE_LIST :=  Makefile main.d
+# 'override' directive
 GNUMAKEFLAGS := 
 # makefile (from 'Makefile', line 13)
 CXXFLAGS = -std=c++17 -Wall -g
@@ -55,7 +52,7 @@ CXXFLAGS = -std=c++17 -Wall -g
 XDG_DATA_DIRS = /usr/local/share:/usr/share:/var/lib/snapd/desktop
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from 'Makefile', line 51)
+# makefile (from 'Makefile', line 47)
 DEL = del
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
@@ -65,14 +62,14 @@ VSCODE_CWD = /mnt/c/Users/almuf/AppData/Local/Programs/Microsoft VS Code
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
 PATH = /root/.vscode-server/bin/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5/bin/remote-cli:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Razer Chroma SDK/bin:/mnt/c/Program Files/Razer Chroma SDK/bin:/mnt/c/Python39/Scripts/:/mnt/c/Python39/:/mnt/c/Program Files (x86)/Razer/ChromaBroadcast/bin:/mnt/c/Program Files/Razer/ChromaBroadcast/bin:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0/:/mnt/c/Windows/System32/OpenSSH/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files/Intel/WiFi/bin/:/mnt/c/Program Files/Common Files/Intel/WirelessCommon/:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/Microsoft SQL Server/130/Tools/Binn/:/mnt/c/Program Files/Microsoft SQL Server/Client SDK/ODBC/170/Tools/Binn/:/mnt/c/Users/almuf/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/almuf/.dotnet/tools:/mnt/c/Program Files/Git/cmd:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/WINDOWS/system32/config/systemprofile/AppData/Local/Microsoft/WindowsApps:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files (x86)/dotnet/:/mnt/c/Program Files (x86)/Microsoft Visual Studio/2019/Community/MSBuild/Current/Bin:/mnt/c/Users/almuf/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/almuf/AppData/Local/gitkraken/bin:/mnt/c/Users/almuf/AppData/Local/GitHubDesktop/bin:/snap/bin
-# makefile (from 'Makefile', line 41)
+# makefile (from 'Makefile', line 37)
 DEP = $(OBJ:$(OBJDIR)/%.o=%.d)
 # environment
 XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-b1bc05dd-e344-4861-9809-e7cba57b98ef.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-56856d78-bf2b-4c83-9318-8323c8e79905.sock
 # makefile (from 'Makefile', line 15)
 LDFLAGS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
 # default
@@ -92,11 +89,11 @@ PWD = /home/almufer/proyectoFinal
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/3241_interop
+WSL_INTEROP = /run/WSL/10_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-WT_SESSION = 4b5ca5f6-47e8-4797-bef6-d010024f932b
+WT_SESSION = 4e422cc9-ecfd-47f4-8b8a-8de90b24031b
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -106,8 +103,8 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 LOGNAME = root
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# makefile (from 'Makefile', line 47)
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# makefile (from 'Makefile', line 43)
 DELOBJ = $(OBJ)
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
@@ -167,7 +164,7 @@ MAKEFILES :=
 OBJDIR = obj
 # environment
 LC_ALL = C
-# makefile (from 'Makefile', line 55)
+# makefile (from 'Makefile', line 51)
 WDELOBJ = $(SRC:$(SRCDIR)/%$(EXT)=$(OBJDIR)\\%.o)
 # environment
 HOSTTYPE = x86_64
@@ -189,8 +186,10 @@ TERM = xterm-256color
 VSCODE_EXTHOST_WILL_SEND_SOCKET = true
 # environment
 WSL_DISTRO_NAME = Ubuntu
+# environment
+MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=7/128=5%
+# Load=89/1024=9%, Rehash=0, Collisions=7/143=5%
 
 # Pattern-specific Variable Values
 
@@ -198,74 +197,219 @@ WSL_DISTRO_NAME = Ubuntu
 
 # Directories
 
-# src/json (device 2080, inode 55168): 12 files, no impossibilities.
-# . (device 2080, inode 59298): 22 files, no impossibilities.
-# src/utils (device 2080, inode 59342): 12 files, no impossibilities.
-# src/main.o (device 2080, inode 62805): could not be opened.
-# src/sdlutils (device 2080, inode 59322): 22 files, no impossibilities.
-# src (device 2080, inode 11801): 7 files, no impossibilities.
+# src/json (device 2080, inode 55168): 9 files, no impossibilities.
+# . (device 2080, inode 59298): 23 files, no impossibilities.
+# src/utils (device 2080, inode 59342): 10 files, no impossibilities.
+# json/src (device 0, inode 0): No files, 3 impossibilities.
+# sdlutils/src (device 0, inode 0): No files, 4 impossibilities.
+# src/sdlutils (device 2080, inode 59322): 18 files, no impossibilities.
+# src (device 2080, inode 11801): 6 files, no impossibilities.
+# utils/src (device 0, inode 0): No files, 2 impossibilities.
 # src/main.cpp (device 2080, inode 11877): could not be opened.
 
-# 75 files, no impossibilities in 7 directories.
+# 66 files, 9 impossibilities in 9 directories.
 
 # Implicit Rules
 
 %.d: src/%.cpp
-#  recipe to execute (from 'Makefile', line 83):
+#  recipe to execute (from 'Makefile', line 79):
 	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
 
-# 1 implicit rules, 0 (0.0%) terminal.
+obj/%.o: src/%.cpp
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# 2 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
+obj/json/JSONValue.o: src/json/JSONValue.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'json/JSONValue'
+#  Last modified 2022-05-28 19:30:14.5980754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+utils/Collisions.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+src/sdlutils/sdlutils_demo.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-28 19:00:27.3780754
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+json/json_demo.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
 all: damas
 #  Command line target.
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+utils/Vector2D.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+src/sdlutils/SoundEffect.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
+ 
+
+.PHONY: clean cleandep cleanw cleandepw
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-src/utils/Collisions.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/json/json_demo.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:09
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/main.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+json/JSON.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
 
-# Not a target:
-src/utils/Vector2D.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/utils/Collisions.o: src/utils/Collisions.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'utils/Collisions'
+#  Last modified 2022-05-28 19:30:16.0880754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-damas: src/main.o src/sdlutils/SoundEffect.o src/sdlutils/Texture.o src/sdlutils/SDLUtils.o src/sdlutils/sdlutils_demo.o src/json/json_demo.o src/json/JSONValue.o src/json/JSON.o src/utils/Vector2D.o src/utils/Collisions.o
+obj/main.o: src/main.cpp src/main.cpp src/sdlutils/sdlutils_demo.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-05-28 19:28:29.2180754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+damas: obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/sdlutils/sdlutils_demo.o obj/json/json_demo.o obj/json/JSONValue.o obj/json/JSON.o obj/utils/Vector2D.o obj/utils/Collisions.o
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  recipe to execute (from 'Makefile', line 75):
+#  Last modified 2022-05-28 19:30:51.4280754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 71):
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
 # Not a target:
 Makefile:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-05-28 19:31:11.2680754
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/sdlutils/sdlutils_demo.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+json/JSONValue.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+obj/utils/Vector2D.o: src/utils/Vector2D.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'utils/Vector2D'
+#  Last modified 2022-05-28 19:30:15.6480754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
-src/sdlutils/SoundEffect.o:
+src/sdlutils/Texture.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/json/JSON.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:09
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/sdlutils/SDLUtils.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
+
+cleanw:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
+#  recipe to execute (from 'Makefile', line 127):
+	$(DEL) $(WDELOBJ) $(DEP) $(APPNAME)$(EXE)
+
+# Not a target:
+sdlutils/sdlutils_demo.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+src/json/JSONValue.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:09
+#  File has been updated.
+#  Successfully updated.
+
+main.d: src/main.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-05-29 11:48:24.9764632
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 79):
+	@$(CPP) $(CFLAGS) $< -MM -MT $(@:%.d=$(OBJDIR)/%.o) >$@
+
+# Not a target:
+sdlutils/SoundEffect.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+obj/sdlutils/sdlutils_demo.o: src/sdlutils/sdlutils_demo.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/sdlutils_demo'
+#  Last modified 2022-05-28 19:30:13.5680754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
 .DEFAULT:
@@ -273,51 +417,131 @@ src/sdlutils/SoundEffect.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-src/json/json_demo.o:
+cleandep:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Modification time never checked.
+#  File does not exist.
 #  File has not been updated.
- 
+#  recipe to execute (from 'Makefile', line 115):
+	$(RM) $(DEP)
+
+cleandepw:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 137):
+	$(DEL) $(DEP)
+
+obj/sdlutils/SoundEffect.o: src/sdlutils/SoundEffect.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/SoundEffect'
+#  Last modified 2022-05-28 19:30:09.2080754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 105):
+	$(RM) $(DELOBJ) $(DEP) $(APPNAME)
 
 # Not a target:
-src/sdlutils/Texture.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/utils/Collisions.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:13
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/json/JSON.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-28 19:25:11.6680754
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/sdlutils/SDLUtils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/utils/Vector2D.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:13
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
-src/json/JSONValue.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+sdlutils/Texture.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+obj/json/json_demo.o: src/json/json_demo.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'json/json_demo'
+#  Last modified 2022-05-28 19:30:13.5980754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+sdlutils/SDLUtils.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+obj/sdlutils/Texture.o: src/sdlutils/Texture.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/Texture'
+#  Last modified 2022-05-28 19:30:10.0480754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+obj/json/JSON.o: src/json/JSON.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'json/JSON'
+#  Last modified 2022-05-28 19:30:15.2180754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+obj/sdlutils/SDLUtils.o: src/sdlutils/SDLUtils.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/SDLUtils'
+#  Last modified 2022-05-28 19:30:12.0380754
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+src/sdlutils/sdlutils_demo.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
 
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/30=0%
+# Load=41/1024=4%, Rehash=0, Collisions=3/138=2%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 88 / storage = 1050 B / avg = 11 B
-# current buf: size = 8162 B / used = 1050 B / count = 88 / avg = 11 B
+# strcache buffers: 1 (0) / strings = 125 / storage = 1816 B / avg = 14 B
+# current buf: size = 8162 B / used = 1816 B / count = 125 / avg = 14 B
 
-# strcache performance: lookups = 118 / hit rate = 25%
+# strcache performance: lookups = 206 / hit rate = 39%
 # hash-table stats:
-# Load=88/8192=1%, Rehash=0, Collisions=5/118=4%
-# Finished Make data base on Sat May 28 19:26:57 2022
+# Load=125/8192=2%, Rehash=0, Collisions=16/206=8%
+# Finished Make data base on Sun May 29 11:48:25 2022
 
  
