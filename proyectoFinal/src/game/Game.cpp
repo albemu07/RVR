@@ -32,7 +32,7 @@ void Game::init() {
 	renderer = sdl->renderer();
 
 	// we can take textures from the predefined ones, and we can create a custom one as well
-	// auto &sdlLogo = sdl.images().at("sdl_logo");
+	//auto &sdlLogo = sdl->images().at("board");
 	// auto &helloSDL = sdl.msgs().at("HelloSDL");
 	// Texture pressAnyKey(renderer, "Press Esc key to exit",
 	// 		sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
@@ -48,6 +48,7 @@ void Game::init() {
 	// a boolean to exit the loop
 	exit_ = false;
 	b = new Board();
+	b->init();
 	while (!exit_) {
 		Uint32 startTime = sdl->currRealTime();
 
@@ -56,6 +57,9 @@ void Game::init() {
 		update();
 		refresh();
 
+		// sdl->clearRenderer();
+		// sdlLogo.render(0, 0);
+		// sdl->presentRenderer();
 		render();
 
 		Uint32 frameTime = sdl->currRealTime() - startTime;

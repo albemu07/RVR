@@ -6,6 +6,7 @@
 class InputHandler;
 class SDLUtils;
 class SDL_Renderer;
+class Texture;
 
 struct Cell{
     //bool pisada
@@ -33,4 +34,5 @@ private:
     SDL_Renderer* renderer;
     Board* b;
     bool exit_ = false;
+    Texture* text;
 };
