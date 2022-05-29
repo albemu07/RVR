@@ -12,6 +12,8 @@ public:
 private:
     void handleInput(void);
     void render(void);
+    void update(void);
+    void refresh(void);
 
     InputHandler* in;
     SDLUtils* sdl;

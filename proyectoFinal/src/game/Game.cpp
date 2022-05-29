@@ -38,14 +38,6 @@ void Game::init() {
 	// 		sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
 	// 		build_sdlcolor(0xffffffff));
 
-	// some coordinates
-	// auto x0 = (winWidth - pressAnyKey.width()) / 2;
-	// auto y0 = (winHeight - pressAnyKey.height()) / 2;
-	// auto x1 = 0;
-	// auto y1 = y0 - 4 * pressAnyKey.height();
-	// auto x2 = (winWidth - sdlLogo.width()) / 2;
-	// auto y2 = y0 + 2 * pressAnyKey.height();
-
 	// start the music in a loop
 	//sdl.musics().at("beat").play();
 
@@ -60,6 +52,9 @@ void Game::init() {
 		Uint32 startTime = sdl->currRealTime();
 
 		handleInput();
+
+		update();
+		refresh();
 
 		render();
 
@@ -101,4 +96,12 @@ void Game::render() {
 
 	// present new frame
 	sdl->presentRenderer();
+}
+
+void Game::update() {
+
+}
+
+void Game::refresh() {
+
 }
