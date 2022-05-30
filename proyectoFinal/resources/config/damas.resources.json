@@ -10,7 +10,9 @@
     { "id" : "sdl_logo", "file" : "resources/images/SDL_logo.png" },
     { "id" : "board", "file" : "resources/Assets/Tablero.png" },
     { "id" : "checkWhite", "file" : "resources/Assets/PeonBlanco.png" },
-    { "id" : "checkBlack", "file" : "resources/Assets/PeonNegro.png" }
+    { "id" : "checkBlack", "file" : "resources/Assets/PeonNegro.png" },
+    { "id" : "nextMove", "file" : "resources/Assets/NextMove.png" },
+    { "id" : "lastMove", "file" : "resources/Assets/LastMove.png" }
   ],
   
   "messages" : [

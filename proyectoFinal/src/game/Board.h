@@ -11,11 +11,11 @@ class Vector2D;
 
 struct Cell{
     //bool pisada
-    bool marked;
+    bool marked = false;
     //bool nextMove
-    bool nextMove;
+    bool nextMove = false;
     //Ficha ficha
-    Check* check;
+    Check* check = nullptr;
 };
 
 class Board {
@@ -23,8 +23,9 @@ class Board {
     Cell board[8][8];
     Check* whites[12];
     Check* blacks[12];
+    Check* selectedCheck = nullptr;
 public:
-    Board(){};
+    Board();
     ~Board();
     void init(void);
     void handleInput(Vector2D pos);
@@ -32,9 +33,11 @@ public:
     void update(void);
     void refresh(void);
 private:
-    
+    void markPossibleMoves(Vector2D pos);
     InputHandler* in;
     SDLUtils* sdl;
     Board* b;
     Texture* text;
+    Texture* nextM;
+    Texture* lastM;
 };

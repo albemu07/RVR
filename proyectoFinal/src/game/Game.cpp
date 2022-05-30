@@ -11,11 +11,12 @@
 
 using namespace std;
 
-void Game::init() {
+void Game::init()
+{
 
 	// Initialise the SDLGame singleton
 	SDLUtils::init("SDLGame Demo!", 800, 600,
-			"resources/config/damas.resources.json");
+				   "resources/config/damas.resources.json");
 
 	// reference to the SDLUtils Singleton. You could use it as a pointer as well,
 	// I just prefer to use . instead of ->, it is just a matter of taste, nothing
@@ -26,21 +27,21 @@ void Game::init() {
 	//
 	sdl = SDLUtils::instance();
 
-	//show the cursor
+	// show the cursor
 	sdl->showCursor();
 
 	// store the 'renderer' in a local variable, just for convenience
 	renderer = sdl->renderer();
 
 	// we can take textures from the predefined ones, and we can create a custom one as well
-	//auto &sdlLogo = sdl->images().at("board");
+	// auto &sdlLogo = sdl->images().at("board");
 	// auto &helloSDL = sdl.msgs().at("HelloSDL");
 	// Texture pressAnyKey(renderer, "Press Esc key to exit",
 	// 		sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
 	// 		build_sdlcolor(0xffffffff));
 
 	// start the music in a loop
-	//sdl.musics().at("beat").play();
+	// sdl.musics().at("beat").play();
 
 	// reference to the input handler (we could use a pointer, I just . rather than ->).
 	// you can also use the inline method ih() that is defined in InputHandler.h
@@ -50,7 +51,8 @@ void Game::init() {
 	exit_ = false;
 	b = new Board();
 	b->init();
-	while (!exit_) {
+	while (!exit_)
+	{
 		Uint32 startTime = sdl->currRealTime();
 
 		handleInput();
@@ -70,24 +72,26 @@ void Game::init() {
 	}
 
 	// stop the music
-	//Music::haltMusic();
-	
+	// Music::haltMusic();
 }
 
-void Game::handleInput() {
+void Game::handleInput()
+{
 
 	in->clearState();
 	in->refresh();
-	
+
 	if (in->isKeyDown(SDLK_ESCAPE))
 		exit_ = true;
-	if (in->mouseButtonDownEvent()){
-		if(in->getMouseButtonState(0))
+	if (in->mouseButtonDownEvent())
+	{
+		if (in->getMouseButtonState(0))
 			b->handleInput(Vector2D(in->getMousePos().first, in->getMousePos().second));
 	}
 }
 
-void Game::render() {
+void Game::render()
+{
 	// clear screen
 	sdl->clearRenderer();
 	b->render();
@@ -98,19 +102,19 @@ void Game::render() {
 	// x1 = (x1 + 5) % winWidth;
 
 	// render Press Any Key
-	//pressAnyKey.render(x0, y0);
+	// pressAnyKey.render(x0, y0);
 
 	// render the SDLogo
-	//sdlLogo.render(x2, y2);
+	// sdlLogo.render(x2, y2);
 
 	// present new frame
 	sdl->presentRenderer();
 }
 
-void Game::update() {
-
+void Game::update()
+{
 }
 
-void Game::refresh() {
-
+void Game::refresh()
+{
 }
