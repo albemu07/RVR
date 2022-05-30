@@ -7,6 +7,7 @@
 #include "../sdlutils/InputHandler.h"
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
+#include "../utils/Vector2D.h"
 
 using namespace std;
 
@@ -80,6 +81,10 @@ void Game::handleInput() {
 	
 	if (in->isKeyDown(SDLK_ESCAPE))
 		exit_ = true;
+	if (in->mouseButtonDownEvent()){
+		if(in->getMouseButtonState(0))
+			b->handleInput(Vector2D(in->getMousePos().first, in->getMousePos().second));
+	}
 }
 
 void Game::render() {

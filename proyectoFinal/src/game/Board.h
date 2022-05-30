@@ -7,7 +7,7 @@ class InputHandler;
 class SDLUtils;
 class SDL_Renderer;
 class Texture;
-
+class Vector2D;
 
 struct Cell{
     //bool pisada
@@ -27,7 +27,7 @@ public:
     Board(){};
     ~Board();
     void init(void);
-    void handleInput(void);
+    void handleInput(Vector2D pos);
     void render(void);
     void update(void);
     void refresh(void);
