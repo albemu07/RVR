@@ -19,5 +19,5 @@ Check::~Check(){
 }
 
 void Check::render(){
-    text->render(pos->getX()*32, pos->getY()*32);
+    text->render(pos->getX()*32 + 3, pos->getY()*32 + 3);
 }

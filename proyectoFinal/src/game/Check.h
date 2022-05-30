@@ -16,8 +16,9 @@ public:
     void render(void);
     void update(void);
     void refresh(void);
-
+    inline bool isQueen(){return queen;};
 private:
+    bool queen = false;
     InputHandler* in;
     SDLUtils* sdl;   
     Texture* text;
