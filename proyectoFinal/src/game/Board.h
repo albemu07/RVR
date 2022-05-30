@@ -34,6 +34,8 @@ public:
     void refresh(void);
 private:
     void markPossibleMoves(Vector2D pos);
+    void moveSelectedCheck(int x, int y);
+    void cleanNextMoves();
     InputHandler* in;
     SDLUtils* sdl;
     Board* b;

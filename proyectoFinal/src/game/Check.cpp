@@ -4,6 +4,7 @@
 #include "../utils/Vector2D.h"
 
 Check::Check(bool white, int x, int y){
+    color = white;
     sdl = SDLUtils::instance();
     if(white){
         text = &sdl->images().at("checkWhite");
