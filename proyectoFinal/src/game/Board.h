@@ -9,6 +9,9 @@ class SDL_Renderer;
 class Texture;
 class Vector2D;
 
+const int CELLSIZE = 32;
+const int SCALE = 2;
+
 struct Cell{
     //bool pisada
     bool marked = false;
@@ -34,10 +37,12 @@ public:
     void refresh(void);
 private:
     void markPossibleMoves(Vector2D pos);
+    void moveSelectedCheck(int x, int y);
+    void cleanNextMoves();
     InputHandler* in;
     SDLUtils* sdl;
-    Board* b;
     Texture* text;
     Texture* nextM;
     Texture* lastM;
+    Vector2D* pos;
 };
