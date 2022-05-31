@@ -3,7 +3,7 @@
 #include "game/Game.h"
 
 int main(int ac, char **av) {
-	Game e;
+	Game e = Game(av[1], av[2]);
 	try {
 		e.init();
 	} catch (const std::string &e) { // catch exceptions thrown as strings

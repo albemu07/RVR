@@ -108,6 +108,21 @@ public:
         return ::bind(sd, (const struct sockaddr *) &sa, sa_len);
     }
 
+    int listen()
+    {
+        return ::listen(sd, 16);
+    }
+
+    int accept()
+    {
+        return ::accept(sd, &sa, &sa_len);
+    }
+
+    int connect()
+    {
+        return ::connect(sd, &sa, sa_len);
+    }
+
     friend std::ostream& operator<<(std::ostream& os, const Socket& dt);
 
     friend bool operator== (const Socket &s1, const Socket &s2);

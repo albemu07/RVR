@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon May 30 11:05:34 2022
+# Make data base, printed on Tue May 31 10:57:07 2022
 
 # Variables
 
@@ -69,7 +69,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-edcaae76-d989-479a-8d7b-9cb589e766c4.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-63fc440f-c116-4525-8699-d82e7241d00b.sock
 # makefile (from 'Makefile', line 15)
 LDFLAGS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
 # default
@@ -89,11 +89,11 @@ PWD = /home/almufer/proyectoFinal
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/225_interop
+WSL_INTEROP = /run/WSL/10_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-WT_SESSION = e1ff35e6-2049-4d5a-8213-935999a22e20
+WT_SESSION = 17a46d9b-7af1-4ad7-b447-7fc463ab165a
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -197,20 +197,21 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# src/json (device 2080, inode 54688): 7 files, no impossibilities.
-# . (device 2080, inode 11621): 19 files, no impossibilities.
- 
-# src/utils (device 2080, inode 55103): 10 files, no impossibilities.
+# src/sockets (device 2080, inode 55154): 5 files, no impossibilities.
+# src/json (device 2080, inode 54695): 7 files, no impossibilities.
+# . (device 2080, inode 11666): 19 files, no impossibilities.
+# src/utils (device 2080, inode 55281): 10 files, no impossibilities.
 # json/src (device 0, inode 0): No files, 2 impossibilities.
 # sdlutils/src (device 0, inode 0): No files, 3 impossibilities.
 # game/src (device 0, inode 0): No files, 3 impossibilities.
-# src/sdlutils (device 2080, inode 54694): 16 files, no impossibilities.
-# src/game (device 2080, inode 54659): 8 files, no impossibilities.
-# src (device 2080, inode 54646): 7 files, no impossibilities.
+# src/sdlutils (device 2080, inode 54981): 16 files, no impossibilities.
+# src/game (device 2080, inode 54688): 8 files, no impossibilities.
+# src (device 2080, inode 54686): 8 files, no impossibilities.
 # utils/src (device 0, inode 0): No files, 2 impossibilities.
-# src/main.cpp (device 2080, inode 54647): could not be opened.
+# src/main.cpp (device 2080, inode 54687): could not be opened.
+# sockets/src (device 0, inode 0): No files, 1 impossibilities.
 
-# 67 files, 10 impossibilities in 11 directories.
+# 73 files, 11 impossibilities in 13 directories.
 
 # Implicit Rules
 
@@ -270,6 +271,7 @@ game/Board.d:
 # Not a target:
 obj/game/Check.o:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
@@ -289,7 +291,7 @@ obj/utils/Collisions.o:
 obj/main.o: src/main.cpp src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-05-30 11:02:52.3430558
+#  Last modified 2022-05-30 12:55:27.5963758
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -307,15 +309,15 @@ obj/main.o: src/main.cpp src/main.cpp src/game/Game.h src/game/Board.h src/game/
 # automatic
 # ^ := src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h
 # automatic
-# ? := src/game/Board.h src/game/Check.h
+# ? := src/game/Game.h src/game/Board.h src/game/Check.h
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=1/15=7%
 #  recipe to execute (from 'Makefile', line 93):
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-damas: obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/json/JSONValue.o obj/json/JSON.o obj/utils/Vector2D.o obj/utils/Collisions.o
+damas: obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/json/JSONValue.o obj/json/JSON.o obj/sockets/Socket.o obj/utils/Vector2D.o obj/utils/Collisions.o
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-30 11:02:52.3660568
+#  Last modified 2022-05-30 12:55:27.6163797
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -360,7 +362,7 @@ obj/game/Game.o:
 main.d: src/main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-05-30 11:05:33.6330857
+#  Last modified 2022-05-31 10:57:07.2544165
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 79):
@@ -376,7 +378,7 @@ sdlutils/SoundEffect.d:
 # Not a target:
 src/game/Check.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 11:02:52.3650564
+#  Last modified 2022-05-30 12:55:27.6043752
 #  File has been updated.
 #  Successfully updated.
 
@@ -421,6 +423,13 @@ obj/sdlutils/SoundEffect.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+sockets/Socket.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
@@ -444,6 +453,12 @@ src/main.cpp:
 #  Successfully updated.
 
 # Not a target:
+obj/sockets/Socket.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 sdlutils/Texture.d:
 #  Implicit rule search has been done.
 #  File does not exist.
@@ -453,8 +468,7 @@ sdlutils/Texture.d:
 # Not a target:
 src/game/Game.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 19:47:13.0975288
- 
+#  Last modified 2022-05-30 19:53:32.4063205
 #  File has been updated.
 #  Successfully updated.
 
@@ -486,24 +500,24 @@ obj/sdlutils/SDLUtils.o:
 # Not a target:
 src/game/Board.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 11:02:52.3550639
+#  Last modified 2022-05-30 12:55:27.6033768
 #  File has been updated.
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=36/1024=4%, Rehash=0, Collisions=6/112=5%
+# Load=38/1024=4%, Rehash=0, Collisions=6/118=5%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 113 / storage = 1453 B / avg = 12 B
-# current buf: size = 8162 B / used = 1453 B / count = 113 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 122 / storage = 1581 B / avg = 12 B
+# current buf: size = 8162 B / used = 1581 B / count = 122 / avg = 12 B
 
-# strcache performance: lookups = 190 / hit rate = 40%
+# strcache performance: lookups = 204 / hit rate = 40%
 # hash-table stats:
-# Load=113/8192=1%, Rehash=0, Collisions=6/190=3%
-# Finished Make data base on Mon May 30 11:05:34 2022
+# Load=122/8192=1%, Rehash=0, Collisions=7/204=3%
+# Finished Make data base on Tue May 31 10:57:07 2022
 
  

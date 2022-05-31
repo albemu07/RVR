@@ -8,8 +8,16 @@
 #include "../sdlutils/macros.h"
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
+#include "../sockets/Socket.h"
+
+#include <unistd.h>
 
 using namespace std;
+
+Game::Game(char* s, char* p) {
+	ips = s;
+	port = p;
+}
 
 void Game::init()
 {
@@ -47,7 +55,32 @@ void Game::init()
 	// you can also use the inline method ih() that is defined in InputHandler.h
 	in = InputHandler::instance();
 
-	// a boolean to exit the loop
+	bool input = false;
+	while (input){
+		in->clearState();
+		in->refresh();
+		if (in->isKeyDown(SDLK_s)){
+			createGame = true;
+			input = true;
+		}
+		else if (in->isKeyDown(SDLK_c)){
+			input = true;
+		}
+	}
+
+	if (createGame){
+		if (creatingGame() != 0)
+		return;
+		myTurn = true;
+	}
+	else {
+		if (joinGame() != 0)
+		return;
+	}
+}
+
+void Game::gameLoop() {
+		// a boolean to exit the loop
 	exit_ = false;
 	b = new Board();
 	b->init();
@@ -64,6 +97,13 @@ void Game::init()
 		// sdlLogo.render(0, 0);
 		// sdl->presentRenderer();
 		render();
+
+		if (!myTurn) {
+			sendInfo();
+		}
+		if (!enemyTurnOver){
+			recvInfo();
+		}
 
 		Uint32 frameTime = sdl->currRealTime() - startTime;
 
@@ -117,4 +157,69 @@ void Game::update()
 
 void Game::refresh()
 {
+}
+
+int Game::creatingGame()
+{
+	sock = new Socket(ips, port);
+	so = sock->socketDesc();
+	if(sock->bind() != 0){
+		std::cout << "Error bind: " << errno <<  "\n";
+        close(so);
+        return -1;
+	}
+
+	if(sock->listen() != 0){
+		std::cout << "Error listen: " << errno <<  "\n";
+        close(so);
+        return -1;
+	}
+
+	ot = sock->accept();
+	if (ot == -1) {
+		std::cout << "Error accept: " << errno <<  "\n";
+        close(so);
+        close(ot);
+        return -1;
+	}
+
+    printf("Conexión establecida");
+	return 0;
+}
+
+int Game::joinGame()
+{
+	sock = new Socket(ips, port);
+	so = sock->socketDesc();
+
+	if (sock->connect() != 0){
+        std::cout << "Error connect: " << errno <<  "\n";
+        close(so);
+        return -1;
+	}
+
+	printf("Conexión establecida");
+	return 0;
+}
+
+int Game::sendInfo() {
+	// if (sock->send(info, *other) == -1){
+	// 	std::cout << "Error send: " << errno <<  "\n";
+	// 	close(so);
+	// 	if (other)
+	// 		close(ot);
+	// 	return -1;
+	// }
+	return 0;
+}
+
+int Game::recvInfo() {
+	// if (sock->recv(info) == -1) {
+	// 	std::cout << "Error recv: " << errno <<  "\n";
+	// 	close(so);
+	// 	if (other)
+	// 		close(ot);
+	// 	return -1;
+	// }
+	return 0;
 }

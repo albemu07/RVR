@@ -12,7 +12,7 @@ Socket::Socket(const char * address, const char * port):sd(-1)
     memset(&hints, 0, sizeof(struct addrinfo));
     hints.ai_flags    = AI_PASSIVE; //Devolver 0.0.0.0
     hints.ai_family   = AF_INET; // IPv4
-    hints.ai_socktype = SOCK_DGRAM;
+    hints.ai_socktype = SOCK_STREAM;
 
     struct addrinfo* res;
     int rc = getaddrinfo(address, port, &hints, &res);

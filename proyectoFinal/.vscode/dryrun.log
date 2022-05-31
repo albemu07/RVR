@@ -10,8 +10,9 @@ g++ -std=c++17 -Wall -g -o obj/game/Check.o -c src/game/Check.cpp
 g++ -std=c++17 -Wall -g -o obj/game/Board.o -c src/game/Board.cpp
 g++ -std=c++17 -Wall -g -o obj/json/JSONValue.o -c src/json/JSONValue.cpp
 g++ -std=c++17 -Wall -g -o obj/json/JSON.o -c src/json/JSON.cpp
+g++ -std=c++17 -Wall -g -o obj/sockets/Socket.o -c src/sockets/Socket.cpp
 g++ -std=c++17 -Wall -g -o obj/utils/Vector2D.o -c src/utils/Vector2D.cpp
 g++ -std=c++17 -Wall -g -o obj/utils/Collisions.o -c src/utils/Collisions.cpp
-g++ -std=c++17 -Wall -g -o damas obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/json/JSONValue.o obj/json/JSON.o obj/utils/Vector2D.o obj/utils/Collisions.o -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
+g++ -std=c++17 -Wall -g -o damas obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/json/JSONValue.o obj/json/JSON.o obj/sockets/Socket.o obj/utils/Vector2D.o obj/utils/Collisions.o -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
 make: Leaving directory '/home/almufer/proyectoFinal'
  
