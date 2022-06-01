@@ -157,5 +157,8 @@ void Board::processMovement(Vector2D* a, Vector2D* b) {
     f = 7 - b->getX();
     g = 7 - b->getY();
     moveSelectedCheck(f, g, false);
+    if(g==7) 
+        selectedCheck->setQueen(true);
+    selectedCheck = nullptr;
     board[f][g].marked = true;
 }
