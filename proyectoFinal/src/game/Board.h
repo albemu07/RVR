@@ -27,7 +27,7 @@ class Board {
     int checkRival = 12;
     Check* selectedCheck = nullptr;
 public:
-    Board();
+    Board(bool h);
     ~Board();
     void init(void);
     bool handleInput(Vector2D pos);
@@ -42,6 +42,8 @@ public:
     inline Vector2D* getNewPos() {
         return newPos;
     }
+
+    bool myTurn = false;
 private:
     void markPossibleMoves(Vector2D pos);
     void moveSelectedCheck(int x, int y, bool eat);
@@ -54,4 +56,5 @@ private:
     Vector2D* pos;
     Vector2D* oldPos;
     Vector2D* newPos;
+    bool host;
 };
