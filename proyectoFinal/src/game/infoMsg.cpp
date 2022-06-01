@@ -14,6 +14,8 @@ void infoMsg::to_bin() {
 
     memcpy(_pointer, &type, sizeof(uint8_t));
     _pointer += sizeof(uint8_t);
+    memcpy(_pointer, &timeLeft, sizeof(uint32_t));
+    _pointer += sizeof(uint32_t);
     float a = iniPos->getX();
     memcpy(_pointer, &a, sizeof(float));
     _pointer += sizeof(float);
@@ -40,6 +42,8 @@ int infoMsg::from_bin(char* bobj) {
 
     memcpy(&type, _pointer, sizeof(uint8_t));
     _pointer += sizeof(uint8_t);
+    memcpy(&timeLeft, _pointer, sizeof(uint32_t));
+    _pointer += sizeof(uint32_t);
     float a;
     memcpy(&a, _pointer, sizeof(float));
     _pointer += sizeof(float);

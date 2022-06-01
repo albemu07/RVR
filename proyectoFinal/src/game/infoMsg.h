@@ -7,16 +7,17 @@ class Vector2D;
 
 class infoMsg : public Serializable {  
 public:
-    static const size_t MESSAGE_SIZE = 4 * sizeof(float) + sizeof(bool) + sizeof(uint8_t);
+    static const size_t MESSAGE_SIZE = 4 * sizeof(float) + sizeof(bool) + sizeof(uint8_t) + sizeof(uint32_t);
 
     enum msgType {
         LOGIN = 0,
         MOVEMENT = 1,
-        LOGOUT = 2
+        LOGOUT = 2,
+        TIME = 3
     };
 
     infoMsg(){};
-    infoMsg(uint8_t t, Vector2D*a, Vector2D* b, bool c) : type(t),iniPos(a),newPos(b),turn(c) {};
+    infoMsg(uint8_t t, uint32_t time, Vector2D*a, Vector2D* b, bool c) : type(t), timeLeft(time),iniPos(a),newPos(b),turn(c) {};
     ~infoMsg();
     void to_bin();
     int from_bin(char * bobj);
@@ -33,9 +34,13 @@ public:
     inline msgType getType(){
         return (msgType)type;
     }
+    inline msgType getTime(){
+        return (msgType)type;
+    }
 
 private:
     uint8_t type;
+    uint32_t timeLeft;
     Vector2D *iniPos;
     Vector2D *newPos;
     bool turn;

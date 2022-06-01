@@ -8,7 +8,9 @@ int main(int ac, char **av) {
 	Game e = Game(av[1], av[2], av[3]);
 	try {
 		e.init();
+		std::thread net_thread([&e](){ e.exitLoop(); });
 		e.gameLoop();
+		net_thread.detach();
 		e.didIWin();
 	} catch (const std::string &e) { // catch exceptions thrown as strings
 		std::cerr << e << std::endl;

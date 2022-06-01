@@ -24,6 +24,18 @@ Game::Game(char* s, char* p, char* isServer) {
 	std::cout << createGame << "\n";
 }
 
+Game::~Game() {
+	delete ips;
+    delete port;
+
+    delete sock;
+    delete other;
+
+	delete in;
+    delete sdl;
+    delete b;
+}
+
 void Game::init()
 {
 	// Initialise the SDLGame singleton
@@ -115,12 +127,15 @@ void Game::gameLoop() {
 
 		Uint32 frameTime = sdl->currRealTime() - startTime;
 
-		if (frameTime < 20)
+		if (frameTime < 20){
 			SDL_Delay(20 - frameTime);
+		}
+		myTime -= 20;
+		updateTime();
 	}
 
 	if (!otherEnded){
-		infoMsg msg = infoMsg((int)msg.LOGOUT, new Vector2D(0, 0), new Vector2D(0, 0), false);
+		infoMsg msg = infoMsg((int)msg.LOGOUT, 0, new Vector2D(0, 0), new Vector2D(0, 0), false);
 		if (sock->send(msg) == -1){
 			std::cout << "Error send: " << errno <<  "\n";
 			close(so);
@@ -135,6 +150,25 @@ void Game::gameLoop() {
 	} 
 	// stop the music
 	// Music::haltMusic();
+}
+
+void Game::exitLoop(){
+	while(true){
+		if (in->isKeyDown(SDLK_ESCAPE))
+			exit_ = true;
+	}
+}
+
+int Game::updateTime() {
+		infoMsg msg = infoMsg((int)msg.TIME, myTime, new Vector2D(0, 0), new Vector2D(0, 0), false);
+		if (sock->send(msg) == -1){
+			std::cout << "Error send: " << errno <<  "\n";
+			close(so);
+			if (createGame)
+				close(ot);
+			return -1;
+		}
+		return 0;
 }
 
 void Game::didIWin() {
@@ -170,8 +204,8 @@ void Game::handleInput()
 	in->clearState();
 	in->refresh();
 
-	if (in->isKeyDown(SDLK_ESCAPE))
-		exit_ = true;
+	// if (in->isKeyDown(SDLK_ESCAPE))
+	// 	exit_ = true;
 	if (in->mouseButtonDownEvent() && b->myTurn)
 	{
 		if (in->getMouseButtonState(0))
@@ -235,7 +269,7 @@ int Game::joinGame()
 
 	other = sock;
 	ot = so;
-	infoMsg msg = infoMsg((int)msg.LOGIN, new Vector2D(0, 0), new Vector2D(0, 0), false);
+	infoMsg msg = infoMsg((int)msg.LOGIN, 0, new Vector2D(0, 0), new Vector2D(0, 0), false);
 	if (sock->send(msg) == -1){
 		std::cout << "Error send: " << errno <<  "\n";
 		close(so);
@@ -247,7 +281,7 @@ int Game::joinGame()
 }
 
 int Game::sendInfo() {
-	infoMsg msg = infoMsg((uint8_t)msg.MOVEMENT, b->getOldPos(), b->getNewPos(), b->myTurn);
+	infoMsg msg = infoMsg((uint8_t)msg.MOVEMENT, 0, b->getOldPos(), b->getNewPos(), b->myTurn);
 	if (sock->send(msg) == -1){
 		std::cout << "Error send: " << errno <<  "\n";
 		close(so);
@@ -277,6 +311,9 @@ int Game::recvInfo() {
 	else if (msg.getType() == msg.LOGOUT){
 		exit_ = true;
 		otherEnded = true;
+	}
+	else if (msg.getType() == msg.TIME){
+		enemyTime = msg.getTime();
 	}
 	return 0;
 }
