@@ -3,8 +3,9 @@
 
 using namespace std;
 
-Board::Board(){
-    
+Board::Board(bool h){
+    host = h;
+    myTurn = h;
 }
 
 Board::~Board(){
@@ -25,13 +26,13 @@ void Board::init(void){
         int x = i % 4 * 2 + 1;
         int y = i / 4;
         if(y == 1) x--;
-        board[x][y].check = new Check(true, x, y, (int)pos->getX(), (int)pos->getY());
+        board[x][y].check = new Check(!host, x, y, (int)pos->getX(), (int)pos->getY());
 
         x = i % 4 * 2;
         y = i / 4;
         if(y == 1) 
             x++;
-        board[x][7-y].check = new Check(false, x, 7-y, (int)pos->getX(), (int)pos->getY());
+        board[x][7-y].check = new Check(host, x, 7-y, (int)pos->getX(), (int)pos->getY());
     }
 }
 
@@ -64,10 +65,12 @@ bool Board::handleInput(Vector2D p){
     int x = (p.getX()-pos->getX())/(CELLSIZE*SCALE);
     int y = (p.getY()-pos->getY())/(CELLSIZE*SCALE);
     if(board[x][y].check!=nullptr){
-        oldPos->set(x, y);
-        selectedCheck = board[x][y].check;
-        cleanNextMoves();
-        markPossibleMoves(Vector2D(x,y));
+        if(board[x][y].check->color == host){
+            oldPos->set(x, y);
+            selectedCheck = board[x][y].check;
+            cleanNextMoves();
+            markPossibleMoves(Vector2D(x,y));
+        }
     }
     else if(board[x][y].nextMove){
         newPos->set(x, y);
@@ -130,11 +133,14 @@ void Board::cleanNextMoves(){
 }
 
 void Board::moveSelectedCheck(int x, int y, bool eat){
+    myTurn = false;
     Vector2D* p = selectedCheck->getPos();
     if(abs(x-p->getX()) == 2 && board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check != nullptr){
         board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check = nullptr;
-        if(eat)
+        if(eat){
+            myTurn = true;
             checkRival--; 
+        }
     }
     Check* c = board[(int)p->getX()][(int)p->getY()].check;
     board[(int)p->getX()][(int)p->getY()].check = nullptr;

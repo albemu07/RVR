@@ -33,7 +33,7 @@ private:
     bool otherEnded = false;
     bool createGame = false;
 
-    bool myTurn = false;
+    bool hasEaten = false;
     bool movedCheck = false;
 
     char* ips;

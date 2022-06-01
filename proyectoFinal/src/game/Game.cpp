@@ -75,7 +75,6 @@ void Game::init()
 	if (createGame){
 		if (creatingGame() != 0)
 			return;
-		myTurn = true;
 	}
 	else {
 		if (joinGame() != 0)
@@ -86,7 +85,7 @@ void Game::init()
 void Game::gameLoop() {
 		// a boolean to exit the loop
 	exit_ = false;
-	b = new Board();
+	b = new Board(createGame);
 	b->init();
 	while (!exit_)
 	{
@@ -102,13 +101,12 @@ void Game::gameLoop() {
 		// sdl->presentRenderer();
 		render();
 
-		if (myTurn && movedCheck) {
+		if (movedCheck) {
 			movedCheck = false;
-			myTurn = false;
 			if (sendInfo() == -1)
 				return;
 		}
-		if (!myTurn){
+		if (!b->myTurn){
 			if (recvInfo() == -1)
 				return;
 		}
@@ -139,7 +137,7 @@ void Game::handleInput()
 
 	if (in->isKeyDown(SDLK_ESCAPE))
 		exit_ = true;
-	if (in->mouseButtonDownEvent() && myTurn)
+	if (in->mouseButtonDownEvent() && b->myTurn)
 	{
 		if (in->getMouseButtonState(0))
 			movedCheck = b->handleInput(Vector2D(in->getMousePos().first, in->getMousePos().second));
@@ -223,7 +221,7 @@ int Game::joinGame()
 }
 
 int Game::sendInfo() {
-	infoMsg msg = infoMsg((uint8_t)msg.MOVEMENT, b->getOldPos(), b->getNewPos(), myTurn);
+	infoMsg msg = infoMsg((uint8_t)msg.MOVEMENT, b->getOldPos(), b->getNewPos(), b->myTurn);
 	if (sock->send(msg) == -1){
 		std::cout << "Error send: " << errno <<  "\n";
 		close(so);
@@ -248,7 +246,7 @@ int Game::recvInfo() {
 	std::cout << "Recv bien\n";
 	if (msg.getType() == msg.MOVEMENT) {
 		b->processMovement(msg.getIniPos(), msg.getNewPos());
-		myTurn= !msg.getTurn();
+		b->myTurn= !msg.getTurn();
 	}
 	else if (msg.getType() == msg.LOGOUT){
 		exit_ = true;
