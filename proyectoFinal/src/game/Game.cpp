@@ -42,13 +42,6 @@ void Game::init()
 	SDLUtils::init("SDLGame Demo!", 800, 600,
 				   "resources/config/damas.resources.json");
 
-	// reference to the SDLUtils Singleton. You could use it as a pointer as well,
-	// I just prefer to use . instead of ->, it is just a matter of taste, nothing
-	// else!
-	//
-	// you can also use the inline method sdlutils() that simply returns the value
-	// of *SDLUtils::instance() --- it is defined at the end of SDLUtils.h
-	//
 	sdl = SDLUtils::instance();
 
 	// show the cursor
@@ -57,21 +50,9 @@ void Game::init()
 	// store the 'renderer' in a local variable, just for convenience
 	renderer = sdl->renderer();
 
-	// we can take textures from the predefined ones, and we can create a custom one as well
-	// auto &sdlLogo = sdl->images().at("board");
-	// auto &helloSDL = sdl.msgs().at("HelloSDL");
-	// Texture pressAnyKey(renderer, "Press Esc key to exit",
-	// 		sdl.fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
-	// 		build_sdlcolor(0xffffffff));
-
-	// start the music in a loop
-	// sdl.musics().at("beat").play();
-
-	// reference to the input handler (we could use a pointer, I just . rather than ->).
-	// you can also use the inline method ih() that is defined in InputHandler.h
 	in = InputHandler::instance();
 
-	auto &iniImg = sdl->images().at("inicio");
+	auto &iniImg = sdl->images().at("sdl_logo");
 	sdl->clearRenderer();
 	iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
 	sdl->presentRenderer();
@@ -100,7 +81,7 @@ void Game::init()
 }
 
 void Game::gameLoop() {
-		// a boolean to exit the loop
+	// a boolean to exit the loop
 	exit_ = false;
 	b = new Board(createGame);
 	b->init();
@@ -110,9 +91,6 @@ void Game::gameLoop() {
 
 		handleInput();
 
-		// sdl->clearRenderer();
-		// sdlLogo.render(0, 0);
-		// sdl->presentRenderer();
 		render();
 
 		if (movedCheck) {
@@ -148,8 +126,6 @@ void Game::gameLoop() {
 		close(so);
 		close(ot);
 	} 
-	// stop the music
-	// Music::haltMusic();
 }
 
 void Game::exitLoop(){
@@ -174,15 +150,15 @@ int Game::updateTime() {
 void Game::didIWin() {
 	sdl->clearRenderer();
 	if (win){
-		auto &iniImg = sdl->images().at("ganar");
+		auto &iniImg = sdl->images().at("sdl_logo");
 		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
 	}
 	else if (exit_){
-		auto &iniImg = sdl->images().at("interrupción");
+		auto &iniImg = sdl->images().at("sdl_logo");
 		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
 	}
 	else {
-		auto &iniImg = sdl->images().at("perder");
+		auto &iniImg = sdl->images().at("sdl_logo");
 		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
 	}
 
@@ -218,6 +194,17 @@ void Game::render()
 	// clear screen
 	sdl->clearRenderer();
 	b->render();
+	
+	Texture timer(renderer, to_string((int)enemyTime/1000),
+	sdl->fonts().at("ARIAL24"), build_sdlcolor(0xffffffff),
+	build_sdlcolor(0x112233ff));
+	timer.render((sdl->width() - timer.width()) / 8, (sdl->height()/8 - timer.height()) / 8);
+
+	Texture timer2(renderer, to_string((int)myTime/1000),
+	sdl->fonts().at("ARIAL24"), build_sdlcolor(0xffffffff),
+	build_sdlcolor(0x112233ff));
+	timer2.render(7*(sdl->width() - timer2.width()) / 8, 7*(sdl->height() - timer2.height()) / 8);
+
 	sdl->presentRenderer();
 }
 
