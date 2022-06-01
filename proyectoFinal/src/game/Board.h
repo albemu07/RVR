@@ -31,10 +31,18 @@ public:
     Board();
     ~Board();
     void init(void);
-    void handleInput(Vector2D pos);
+    bool handleInput(Vector2D pos);
     void render(void);
     void update(void);
     void refresh(void);
+    void processMovement(Vector2D* a, Vector2D* b);
+
+    inline Vector2D* getOldPos() {
+        return oldPos;
+    }
+    inline Vector2D* getNewPos() {
+        return newPos;
+    }
 private:
     void markPossibleMoves(Vector2D pos);
     void moveSelectedCheck(int x, int y);
@@ -45,4 +53,6 @@ private:
     Texture* nextM;
     Texture* lastM;
     Vector2D* pos;
+    Vector2D* oldPos;
+    Vector2D* newPos;
 };

@@ -6,7 +6,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Tue May 31 10:57:07 2022
+# Make data base, printed on Wed Jun  1 10:36:03 2022
 
 # Variables
 
@@ -69,7 +69,7 @@ XDG_RUNTIME_DIR = /mnt/wslg/runtime-dir
 # environment
 VSCODE_LOG_STACK = false
 # environment
-VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-63fc440f-c116-4525-8699-d82e7241d00b.sock
+VSCODE_IPC_HOOK_CLI = /mnt/wslg/runtime-dir/vscode-ipc-c8b7f26a-3953-48ab-aff0-632ad7d2bc16.sock
 # makefile (from 'Makefile', line 15)
 LDFLAGS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
 # default
@@ -89,11 +89,11 @@ PWD = /home/almufer/proyectoFinal
 # default
 .LOADED := 
 # environment
-WSL_INTEROP = /run/WSL/10_interop
+WSL_INTEROP = /run/WSL/9_interop
 # environment
 PULSE_SERVER = /mnt/wslg/PulseServer
 # environment
-WT_SESSION = 17a46d9b-7af1-4ad7-b447-7fc463ab165a
+WT_SESSION = 895c35c4-90a9-44ab-942d-a7535109d6a3
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -128,6 +128,7 @@ USER = root
 .DEFAULT_GOAL := all
 # environment
 NAME = Code
+ 
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -189,7 +190,7 @@ WSL_DISTRO_NAME = Ubuntu
 # environment
 MOTD_SHOWN = update-motd
 # variable set hash-table stats:
-# Load=89/1024=9%, Rehash=0, Collisions=7/148=5%
+# Load=89/1024=9%, Rehash=0, Collisions=7/143=5%
 
 # Pattern-specific Variable Values
 
@@ -197,21 +198,21 @@ MOTD_SHOWN = update-motd
 
 # Directories
 
-# src/sockets (device 2080, inode 55154): 5 files, no impossibilities.
-# src/json (device 2080, inode 54695): 7 files, no impossibilities.
-# . (device 2080, inode 11666): 19 files, no impossibilities.
-# src/utils (device 2080, inode 55281): 10 files, no impossibilities.
+# src/sockets (device 2080, inode 55282): 5 files, no impossibilities.
+# src/json (device 2080, inode 54811): 7 files, no impossibilities.
+# . (device 2080, inode 12085): 19 files, no impossibilities.
+# src/utils (device 2080, inode 55286): 10 files, no impossibilities.
 # json/src (device 0, inode 0): No files, 2 impossibilities.
 # sdlutils/src (device 0, inode 0): No files, 3 impossibilities.
-# game/src (device 0, inode 0): No files, 3 impossibilities.
-# src/sdlutils (device 2080, inode 54981): 16 files, no impossibilities.
-# src/game (device 2080, inode 54688): 8 files, no impossibilities.
-# src (device 2080, inode 54686): 8 files, no impossibilities.
+# game/src (device 0, inode 0): No files, 4 impossibilities.
+# src/sdlutils (device 2080, inode 55084): 16 files, no impossibilities.
+# src/game (device 2080, inode 54691): 10 files, no impossibilities.
+# src (device 2080, inode 54689): 8 files, no impossibilities.
 # utils/src (device 0, inode 0): No files, 2 impossibilities.
-# src/main.cpp (device 2080, inode 54687): could not be opened.
+# src/main.cpp (device 2080, inode 54690): could not be opened.
 # sockets/src (device 0, inode 0): No files, 1 impossibilities.
 
-# 73 files, 11 impossibilities in 13 directories.
+# 75 files, 12 impossibilities in 13 directories.
 
 # Implicit Rules
 
@@ -227,11 +228,15 @@ obj/%.o: src/%.cpp
 
 # Files
 
-# Not a target:
-obj/json/JSONValue.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/json/JSONValue.o: src/json/JSONValue.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'json/JSONValue'
+ 
+#  Last modified 2022-05-31 19:36:46.558609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
 utils/Collisions.d:
@@ -240,14 +245,19 @@ utils/Collisions.d:
 #  File has been updated.
 #  Failed to be updated.
 
+# Not a target:
+src/game/Board.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 18:50:56.088609
+#  File has been updated.
+#  Successfully updated.
+
 all: damas
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
 
 # Not a target:
 utils/Vector2D.d:
@@ -255,6 +265,13 @@ utils/Vector2D.d:
 #  File does not exist.
 #  File has been updated.
 #  Failed to be updated.
+
+# Not a target:
+src/sdlutils/SoundEffect.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 game/Board.d:
@@ -268,12 +285,21 @@ game/Board.d:
 #  Modification time never checked.
 #  File has not been updated.
 
+obj/game/Check.o: src/game/Check.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'game/Check'
+#  Last modified 2022-05-31 19:36:44.038609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
 # Not a target:
-obj/game/Check.o:
-#  Implicit rule search has not been done.
- 
-#  Modification time never checked.
-#  File has not been updated.
+src/game/../utils/Vector2D.h:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:13
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 json/JSON.d:
@@ -282,46 +308,36 @@ json/JSON.d:
 #  File has been updated.
 #  Failed to be updated.
 
-# Not a target:
-obj/utils/Collisions.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-obj/main.o: src/main.cpp src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h
+obj/utils/Collisions.o: src/utils/Collisions.cpp
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'main'
-#  Last modified 2022-05-30 12:55:27.5963758
+#  Implicit/static pattern stem: 'utils/Collisions'
+#  Last modified 2022-05-31 19:36:48.198609
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := obj/main.o
-# automatic
-# % := 
-# automatic
-# * := main
-# automatic
-# + := src/main.cpp src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h
-# automatic
-# | := 
-# automatic
-# < := src/main.cpp
-# automatic
-# ^ := src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h
-# automatic
-# ? := src/game/Game.h src/game/Board.h src/game/Check.h
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/15=7%
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 93):
 	$(CC) $(CXXFLAGS) -o $@ -c $<
 
-damas: obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/json/JSONValue.o obj/json/JSON.o obj/sockets/Socket.o obj/utils/Vector2D.o obj/utils/Collisions.o
-#  Implicit rule search has not been done.
-#  Last modified 2022-05-30 12:55:27.6163797
+# Not a target:
+src/sockets/Socket.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-30 19:38:17.5063205
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+#  Successfully updated.
+
+obj/main.o: src/main.cpp src/main.cpp src/game/Game.h src/game/Board.h src/game/Check.h src/game/../utils/Vector2D.h
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'main'
+#  Last modified 2022-05-31 19:36:38.798609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+damas: obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/game/infoMsg.o obj/json/JSONValue.o obj/json/JSON.o obj/sockets/Socket.o obj/utils/Vector2D.o obj/utils/Collisions.o
+#  Implicit rule search has not been done.
+#  Last modified 2022-05-31 19:39:42.708609
+#  File has been updated.
+#  Successfully updated.
 #  recipe to execute (from 'Makefile', line 71):
 	$(CC) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
 
@@ -339,11 +355,44 @@ json/JSONValue.d:
 #  File has been updated.
 #  Failed to be updated.
 
+obj/utils/Vector2D.o: src/utils/Vector2D.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'utils/Vector2D'
+#  Last modified 2022-05-31 19:36:47.768609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
 # Not a target:
-obj/utils/Vector2D.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/sdlutils/Texture.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
+
+obj/game/infoMsg.o: src/game/infoMsg.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'game/infoMsg'
+#  Last modified 2022-05-31 19:36:45.628609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+src/json/JSON.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:09
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/sdlutils/SDLUtils.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:03
+#  File has been updated.
+#  Successfully updated.
 
 cleanw:
 #  Phony target (prerequisite of .PHONY).
@@ -353,16 +402,26 @@ cleanw:
 #  recipe to execute (from 'Makefile', line 127):
 	$(DEL) $(WDELOBJ) $(DEP) $(APPNAME)$(EXE)
 
+obj/game/Game.o: src/game/Game.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'game/Game'
+#  Last modified 2022-05-31 19:39:42.138609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
 # Not a target:
-obj/game/Game.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/json/JSONValue.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:09
+#  File has been updated.
+#  Successfully updated.
 
 main.d: src/main.cpp
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: 'main'
-#  Last modified 2022-05-31 10:57:07.2544165
+#  Last modified 2022-06-01 10:36:03.0941964
 #  File has been updated.
 #  Successfully updated.
 #  recipe to execute (from 'Makefile', line 79):
@@ -378,15 +437,18 @@ sdlutils/SoundEffect.d:
 # Not a target:
 src/game/Check.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 12:55:27.6043752
+#  Last modified 2022-05-31 12:41:02.8294513
 #  File has been updated.
 #  Successfully updated.
 
-# Not a target:
-obj/game/Board.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/game/Board.o: src/game/Board.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'game/Board'
+#  Last modified 2022-05-31 19:36:45.228609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
 game/Check.d:
@@ -410,6 +472,7 @@ cleandep:
 	$(RM) $(DEP)
 
 cleandepw:
+ 
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
@@ -417,11 +480,21 @@ cleandepw:
 #  recipe to execute (from 'Makefile', line 137):
 	$(DEL) $(DEP)
 
+obj/sdlutils/SoundEffect.o: src/sdlutils/SoundEffect.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/SoundEffect'
+#  Last modified 2022-05-31 19:36:39.128609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
 # Not a target:
-obj/sdlutils/SoundEffect.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/game/Check.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 12:41:02.828434
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 sockets/Socket.d:
@@ -446,17 +519,42 @@ game/Game.d:
 #  Failed to be updated.
 
 # Not a target:
-src/main.cpp:
+src/utils/Collisions.cpp:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-29 12:28:28.0764632
+#  Last modified 2022-05-27 14:35:13
 #  File has been updated.
 #  Successfully updated.
 
 # Not a target:
-obj/sockets/Socket.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/main.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 18:49:34.118609
+#  File has been updated.
+#  Successfully updated.
+ 
+
+obj/sockets/Socket.o: src/sockets/Socket.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sockets/Socket'
+#  Last modified 2022-05-31 19:36:47.388609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+# Not a target:
+game/infoMsg.d:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has been updated.
+#  Failed to be updated.
+
+# Not a target:
+src/utils/Vector2D.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-27 14:35:13
+#  File has been updated.
+#  Successfully updated.
 
 # Not a target:
 sdlutils/Texture.d:
@@ -468,7 +566,14 @@ sdlutils/Texture.d:
 # Not a target:
 src/game/Game.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 19:53:32.4063205
+#  Last modified 2022-05-31 19:11:50.708609
+#  File has been updated.
+#  Successfully updated.
+
+# Not a target:
+src/game/infoMsg.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 19:21:44.368609
 #  File has been updated.
 #  Successfully updated.
 
@@ -479,45 +584,61 @@ sdlutils/SDLUtils.d:
 #  File has been updated.
 #  Failed to be updated.
 
-# Not a target:
-obj/sdlutils/Texture.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/sdlutils/Texture.o: src/sdlutils/Texture.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/Texture'
+#  Last modified 2022-05-31 19:36:39.908609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
-obj/json/JSON.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+src/game/Game.cpp:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-31 19:39:02.948609
+#  File has been updated.
+#  Successfully updated.
 
-# Not a target:
-obj/sdlutils/SDLUtils.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+obj/json/JSON.o: src/json/JSON.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'json/JSON'
+#  Last modified 2022-05-31 19:36:47.048609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
+
+obj/sdlutils/SDLUtils.o: src/sdlutils/SDLUtils.cpp
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: 'sdlutils/SDLUtils'
+#  Last modified 2022-05-31 19:36:41.658609
+#  File has been updated.
+#  Successfully updated.
+#  recipe to execute (from 'Makefile', line 93):
+	$(CC) $(CXXFLAGS) -o $@ -c $<
 
 # Not a target:
 src/game/Board.h:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-30 12:55:27.6033768
+#  Last modified 2022-05-31 18:13:08.968609
 #  File has been updated.
 #  Successfully updated.
 
 # files hash-table stats:
-# Load=38/1024=4%, Rehash=0, Collisions=6/118=5%
+# Load=53/1024=5%, Rehash=0, Collisions=6/174=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 122 / storage = 1581 B / avg = 12 B
-# current buf: size = 8162 B / used = 1581 B / count = 122 / avg = 12 B
+# strcache buffers: 1 (0) / strings = 152 / storage = 2129 B / avg = 14 B
+# current buf: size = 8162 B / used = 2129 B / count = 152 / avg = 14 B
 
-# strcache performance: lookups = 204 / hit rate = 40%
+# strcache performance: lookups = 249 / hit rate = 38%
 # hash-table stats:
-# Load=122/8192=1%, Rehash=0, Collisions=7/204=3%
-# Finished Make data base on Tue May 31 10:57:07 2022
+# Load=152/8192=2%, Rehash=0, Collisions=15/249=6%
+# Finished Make data base on Wed Jun  1 10:36:03 2022
 
  

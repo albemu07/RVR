@@ -98,7 +98,7 @@ public:
      *
      *    @return 0 en caso de éxito o -1 si error
      */
-    int send(Serializable& obj, const Socket& sock);
+    int send(Serializable& obj);
 
     /**
      *  Enlaza el descriptor del socket a la dirección y puerto
@@ -114,12 +114,14 @@ public:
     }
 
     int accept()
-    {
-        return ::accept(sd, &sa, &sa_len);
+    { 
+        cli = ::accept(sd, &cliente, &cliente_len);
+        return cli;
     }
 
     int connect()
     {
+        cli = sd;
         return ::connect(sd, &sa, sa_len);
     }
 
@@ -137,12 +139,15 @@ protected:
      *  Descriptor del socket
      */
     int sd;
-
+    int cli;
     /**
      *  Representación binaria del extremo, usada por servidor y cliente
      */
     struct sockaddr sa;
     socklen_t       sa_len;
+
+    struct sockaddr cliente;
+    socklen_t       cliente_len  = sizeof(sockaddr);
 };
 
 #endif /* SOCKET_H_ */

@@ -18,13 +18,15 @@ void Board::init(void){
     nextM = &sdl->images().at("nextMove");
     lastM = &sdl->images().at("lastMove");
     pos = new Vector2D(sdl->width()/2 - text->width()/2*SCALE, sdl->height()/2 - text->height()/2*SCALE);
+    oldPos = new Vector2D();
+    newPos = new Vector2D();
 
     for(int i=0; i<12; i++){
         int x = i % 4 * 2 + 1;
         int y = i / 4;
-        // if(y == 1) x--;
-        // whites[i] = new Check(true, x, y, (int)pos->getX(), (int)pos->getY());
-        // board[x][y].check = whites[i];
+        if(y == 1) x--;
+        whites[i] = new Check(true, x, y, (int)pos->getX(), (int)pos->getY());
+        board[x][y].check = whites[i];
 
         x = i % 4 * 2;
         y = i / 4;
@@ -60,19 +62,23 @@ void Board::render(void){
     }
 }
 
-void Board::handleInput(Vector2D p){
+bool Board::handleInput(Vector2D p){
     int x = (p.getX()-pos->getX())/(CELLSIZE*SCALE);
     int y = (p.getY()-pos->getY())/(CELLSIZE*SCALE);
     if(board[x][y].check!=nullptr){
+        oldPos->set(x, y);
         selectedCheck = board[x][y].check;
         cleanNextMoves();
         markPossibleMoves(Vector2D(x,y));
     }
     else if(board[x][y].nextMove){
+        newPos->set(x, y);
         cleanNextMoves();
         moveSelectedCheck(x, y);
         selectedCheck = nullptr;
+        return true;
     }
+    return false;
 }
 
 void Board::markPossibleMoves(Vector2D p){
@@ -120,6 +126,7 @@ void Board::cleanNextMoves(){
     for(int i=0; i<8; i++){
         for(int j=0; j<8; j++){
             board[i][j].nextMove = false;
+            board[i][j].marked = false;
         }
     }
 }
@@ -132,4 +139,14 @@ void Board::moveSelectedCheck(int x, int y){
     if(y==0)
         c->setQueen(true);
     board[x][y].check = c;
+}
+
+void Board::processMovement(Vector2D* a, Vector2D* b) {
+    int f = 7 - a->getX(), g = 7 - a->getY();
+    board[f][g].marked = true;
+    selectedCheck = board[f][g].check;
+    f = 7 - b->getX();
+    g = 7 - b->getY();
+    moveSelectedCheck(f, g);
+    board[f][g].marked = true;
 }

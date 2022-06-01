@@ -42,7 +42,7 @@ int Socket::recv(Serializable &obj, Socket * &sock)
 
     char buffer[MAX_MESSAGE_SIZE];
 
-    ssize_t bytes = ::recvfrom(sd, buffer, MAX_MESSAGE_SIZE, 0, &sa, &sa_len);
+    ssize_t bytes = ::recvfrom(cli, buffer, MAX_MESSAGE_SIZE, 0, &cliente, &cliente_len);
 
     if ( bytes <= 0 )
     {
@@ -59,14 +59,14 @@ int Socket::recv(Serializable &obj, Socket * &sock)
     return 0;
 }
 
-int Socket::send(Serializable& obj, const Socket& sock)
+int Socket::send(Serializable& obj)
 {
     //Serializar el objeto
     //Enviar el objeto binario a sock usando el socket sd
 
     obj.to_bin();
     
-    int st = sendto(sd, obj.data(), obj.size(), 0, &sock.sa, sock.sa_len);
+    int st = sendto(cli, obj.data(), obj.size(), 0, &cliente, cliente_len);
     if (st == -1){
         std::string s;
         perror(s.c_str());

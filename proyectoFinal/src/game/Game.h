@@ -11,7 +11,7 @@ class Socket;
 
 class Game {
 public:
-    Game(char* s, char* p);
+    Game(char* s, char* p, char* isServer);
     void init(void);
     void gameLoop(void);
 private:
@@ -30,9 +30,11 @@ private:
     SDL_Renderer* renderer;
     Board* b;
     bool exit_ = false;
+    bool otherEnded = false;
     bool createGame = false;
+
     bool myTurn = false;
-    bool enemyTurnOver = false;
+    bool movedCheck = false;
 
     char* ips;
     char* port;

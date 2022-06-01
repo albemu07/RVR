@@ -9,19 +9,23 @@
 #include "../sdlutils/SDLUtils.h"
 #include "../utils/Vector2D.h"
 #include "../sockets/Socket.h"
+#include "infoMsg.h"
 
 #include <unistd.h>
 
 using namespace std;
 
-Game::Game(char* s, char* p) {
+Game::Game(char* s, char* p, char* isServer) {
 	ips = s;
 	port = p;
+	if (isServer[0] == '1')
+		createGame = true;
+	else createGame = false;
+	std::cout << createGame << "\n";
 }
 
 void Game::init()
 {
-
 	// Initialise the SDLGame singleton
 	SDLUtils::init("SDLGame Demo!", 800, 600,
 				   "resources/config/damas.resources.json");
@@ -70,12 +74,12 @@ void Game::init()
 
 	if (createGame){
 		if (creatingGame() != 0)
-		return;
+			return;
 		myTurn = true;
 	}
 	else {
 		if (joinGame() != 0)
-		return;
+			return;
 	}
 }
 
@@ -98,11 +102,15 @@ void Game::gameLoop() {
 		// sdl->presentRenderer();
 		render();
 
-		if (!myTurn) {
-			sendInfo();
+		if (myTurn && movedCheck) {
+			movedCheck = false;
+			myTurn = false;
+			if (sendInfo() == -1)
+				return;
 		}
-		if (!enemyTurnOver){
-			recvInfo();
+		if (!myTurn){
+			if (recvInfo() == -1)
+				return;
 		}
 
 		Uint32 frameTime = sdl->currRealTime() - startTime;
@@ -111,6 +119,14 @@ void Game::gameLoop() {
 			SDL_Delay(20 - frameTime);
 	}
 
+	if (!otherEnded){
+		infoMsg msg = infoMsg((int)msg.LOGOUT, new Vector2D(0, 0), new Vector2D(0, 0), false);
+		if (sock->send(msg) == -1){
+			std::cout << "Error send: " << errno <<  "\n";
+			close(so);
+			return;
+		}
+	}
 	// stop the music
 	// Music::haltMusic();
 }
@@ -123,10 +139,10 @@ void Game::handleInput()
 
 	if (in->isKeyDown(SDLK_ESCAPE))
 		exit_ = true;
-	if (in->mouseButtonDownEvent())
+	if (in->mouseButtonDownEvent() && myTurn)
 	{
 		if (in->getMouseButtonState(0))
-			b->handleInput(Vector2D(in->getMousePos().first, in->getMousePos().second));
+			movedCheck = b->handleInput(Vector2D(in->getMousePos().first, in->getMousePos().second));
 	}
 }
 
@@ -135,19 +151,6 @@ void Game::render()
 	// clear screen
 	sdl->clearRenderer();
 	b->render();
-	// render Hello SDL
-	// helloSDL.render(x1, y1);
-	// if (x1 + helloSDL.width() > winWidth)
-	// 	helloSDL.render(x1 - winWidth, y1);
-	// x1 = (x1 + 5) % winWidth;
-
-	// render Press Any Key
-	// pressAnyKey.render(x0, y0);
-
-	// render the SDLogo
-	// sdlLogo.render(x2, y2);
-
-	// present new frame
 	sdl->presentRenderer();
 }
 
@@ -183,7 +186,15 @@ int Game::creatingGame()
         return -1;
 	}
 
-    printf("Conexión establecida");
+	infoMsg msg = infoMsg();
+	if (sock->recv(msg) == -1) {
+		std::cout << "Error recv: " << errno <<  "\n";
+		close(so);
+		if (createGame)
+			close(ot);
+		return -1;
+	}
+	printf("Conexión establecida\n");
 	return 0;
 }
 
@@ -198,28 +209,50 @@ int Game::joinGame()
         return -1;
 	}
 
-	printf("Conexión establecida");
+	other = sock;
+	ot = so;
+	infoMsg msg = infoMsg((int)msg.LOGIN, new Vector2D(0, 0), new Vector2D(0, 0), false);
+	if (sock->send(msg) == -1){
+		std::cout << "Error send: " << errno <<  "\n";
+		close(so);
+		return -1;
+	}
+	printf("Conexión establecida\n");
+
 	return 0;
 }
 
 int Game::sendInfo() {
-	// if (sock->send(info, *other) == -1){
-	// 	std::cout << "Error send: " << errno <<  "\n";
-	// 	close(so);
-	// 	if (other)
-	// 		close(ot);
-	// 	return -1;
-	// }
+	infoMsg msg = infoMsg((uint8_t)msg.MOVEMENT, b->getOldPos(), b->getNewPos(), myTurn);
+	if (sock->send(msg) == -1){
+		std::cout << "Error send: " << errno <<  "\n";
+		close(so);
+		if (createGame)	
+			close(ot);
+		return -1;
+	}
+	std::cout << "Send bien\n";
 	return 0;
 }
 
 int Game::recvInfo() {
-	// if (sock->recv(info) == -1) {
-	// 	std::cout << "Error recv: " << errno <<  "\n";
-	// 	close(so);
-	// 	if (other)
-	// 		close(ot);
-	// 	return -1;
-	// }
+	std::cout << "Waiting recv\n";
+	infoMsg msg = infoMsg();
+	if (sock->recv(msg) == -1) {
+		std::cout << "Error recv: " << errno <<  "\n";
+		close(so);
+		if (createGame)
+			close(ot);
+		return -1;
+	}
+	std::cout << "Recv bien\n";
+	if (msg.getType() == msg.MOVEMENT) {
+		b->processMovement(msg.getIniPos(), msg.getNewPos());
+		myTurn= !msg.getTurn();
+	}
+	else if (msg.getType() == msg.LOGOUT){
+		exit_ = true;
+		otherEnded = true;
+	}
 	return 0;
 }
