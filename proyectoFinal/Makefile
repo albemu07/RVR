@@ -12,7 +12,7 @@ CC = g++
 
 CXXFLAGS = -std=c++17 -Wall -g
 
-LDFLAGS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
+LDFLAGS = -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL -pthread
 
 
 

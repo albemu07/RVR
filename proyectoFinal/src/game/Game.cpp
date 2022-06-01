@@ -59,6 +59,11 @@ void Game::init()
 	// you can also use the inline method ih() that is defined in InputHandler.h
 	in = InputHandler::instance();
 
+	auto &iniImg = sdl->images().at("inicio");
+	sdl->clearRenderer();
+	iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+	sdl->presentRenderer();
+
 	bool input = false;
 	while (input){
 		in->clearState();
@@ -94,9 +99,6 @@ void Game::gameLoop() {
 
 		handleInput();
 
-		update();
-		refresh();
-
 		// sdl->clearRenderer();
 		// sdlLogo.render(0, 0);
 		// sdl->presentRenderer();
@@ -124,11 +126,44 @@ void Game::gameLoop() {
 		if (sock->send(msg) == -1){
 			std::cout << "Error send: " << errno <<  "\n";
 			close(so);
+			if (createGame)
+				close(ot);
 			return;
 		}
 	}
+	if (createGame){
+		close(so);
+		close(ot);
+	} 
 	// stop the music
 	// Music::haltMusic();
+}
+
+void Game::didIWin() {
+	sdl->clearRenderer();
+	if (win){
+		auto &iniImg = sdl->images().at("ganar");
+		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+	}
+	else if (exit_){
+		auto &iniImg = sdl->images().at("interrupción");
+		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+	}
+	else {
+		auto &iniImg = sdl->images().at("perder");
+		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+	}
+
+	Texture pressAnyKey(renderer, "Press any key to exit",
+	sdl->fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
+	build_sdlcolor(0xffffffff));
+	pressAnyKey.render((sdl->width() - pressAnyKey.width()) / 2, (sdl->height() - pressAnyKey.height()) / 2);
+	sdl->presentRenderer();
+	bool anykey = false;
+	while (!anykey) {
+		if (in->keyDownEvent())
+			anykey = true;
+	}
 }
 
 void Game::handleInput()
@@ -152,14 +187,6 @@ void Game::render()
 	sdl->clearRenderer();
 	b->render();
 	sdl->presentRenderer();
-}
-
-void Game::update()
-{
-}
-
-void Game::refresh()
-{
 }
 
 int Game::creatingGame()
@@ -190,8 +217,7 @@ int Game::creatingGame()
 	if (sock->recv(msg) == -1) {
 		std::cout << "Error recv: " << errno <<  "\n";
 		close(so);
-		if (createGame)
-			close(ot);
+		close(ot);
 		return -1;
 	}
 	printf("Conexión establecida\n");

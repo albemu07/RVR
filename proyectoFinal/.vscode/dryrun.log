@@ -1,19 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
+make --dry-run --keep-going --print-directory
 make: Entering directory '/home/almufer/proyectoFinal'
- 
-g++ -std=c++17 -Wall -g -o obj/main.o -c src/main.cpp
-g++ -std=c++17 -Wall -g -o obj/sdlutils/SoundEffect.o -c src/sdlutils/SoundEffect.cpp
-g++ -std=c++17 -Wall -g -o obj/sdlutils/Texture.o -c src/sdlutils/Texture.cpp
-g++ -std=c++17 -Wall -g -o obj/sdlutils/SDLUtils.o -c src/sdlutils/SDLUtils.cpp
-g++ -std=c++17 -Wall -g -o obj/game/Game.o -c src/game/Game.cpp
-g++ -std=c++17 -Wall -g -o obj/game/Check.o -c src/game/Check.cpp
-g++ -std=c++17 -Wall -g -o obj/game/Board.o -c src/game/Board.cpp
-g++ -std=c++17 -Wall -g -o obj/game/infoMsg.o -c src/game/infoMsg.cpp
-g++ -std=c++17 -Wall -g -o obj/json/JSONValue.o -c src/json/JSONValue.cpp
-g++ -std=c++17 -Wall -g -o obj/json/JSON.o -c src/json/JSON.cpp
-g++ -std=c++17 -Wall -g -o obj/sockets/Socket.o -c src/sockets/Socket.cpp
-g++ -std=c++17 -Wall -g -o obj/utils/Vector2D.o -c src/utils/Vector2D.cpp
-g++ -std=c++17 -Wall -g -o obj/utils/Collisions.o -c src/utils/Collisions.cpp
-g++ -std=c++17 -Wall -g -o damas obj/main.o obj/sdlutils/SoundEffect.o obj/sdlutils/Texture.o obj/sdlutils/SDLUtils.o obj/game/Game.o obj/game/Check.o obj/game/Board.o obj/game/infoMsg.o obj/json/JSONValue.o obj/json/JSON.o obj/sockets/Socket.o obj/utils/Vector2D.o obj/utils/Collisions.o -lSDL2 -lSDL2main -lSDL2_image -lSDL2_mixer -lSDL2_ttf -lGL
+make: Nothing to be done for 'all'.
 make: Leaving directory '/home/almufer/proyectoFinal'
  

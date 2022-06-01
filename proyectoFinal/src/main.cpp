@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "game/Game.h"
+#include <thread>
 
 int main(int ac, char **av) {
 
@@ -8,6 +9,7 @@ int main(int ac, char **av) {
 	try {
 		e.init();
 		e.gameLoop();
+		e.didIWin();
 	} catch (const std::string &e) { // catch exceptions thrown as strings
 		std::cerr << e << std::endl;
 	} catch (const char *e) { // catch exceptions thrown as char*

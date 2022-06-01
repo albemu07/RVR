@@ -14,11 +14,10 @@ public:
     Game(char* s, char* p, char* isServer);
     void init(void);
     void gameLoop(void);
+    void didIWin(void);
 private:
     void handleInput(void);
     void render(void);
-    void update(void);
-    void refresh(void);
 
     int creatingGame(void);
     int joinGame(void);
@@ -30,6 +29,7 @@ private:
     SDL_Renderer* renderer;
     Board* b;
     bool exit_ = false;
+    bool win = false;
     bool otherEnded = false;
     bool createGame = false;
 
