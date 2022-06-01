@@ -25,15 +25,13 @@ void Board::init(void){
         int x = i % 4 * 2 + 1;
         int y = i / 4;
         if(y == 1) x--;
-        whites[i] = new Check(true, x, y, (int)pos->getX(), (int)pos->getY());
-        board[x][y].check = whites[i];
+        board[x][y].check = new Check(true, x, y, (int)pos->getX(), (int)pos->getY());
 
         x = i % 4 * 2;
         y = i / 4;
         if(y == 1) 
             x++;
-        blacks[i] = new Check(false, x, 7-y, (int)pos->getX(), (int)pos->getY());
-        board[x][7-y].check = blacks[i];
+        board[x][7-y].check = new Check(false, x, 7-y, (int)pos->getX(), (int)pos->getY());
     }
 }
 
@@ -74,7 +72,7 @@ bool Board::handleInput(Vector2D p){
     else if(board[x][y].nextMove){
         newPos->set(x, y);
         cleanNextMoves();
-        moveSelectedCheck(x, y);
+        moveSelectedCheck(x, y, true);
         selectedCheck = nullptr;
         return true;
     }
@@ -131,8 +129,13 @@ void Board::cleanNextMoves(){
     }
 }
 
-void Board::moveSelectedCheck(int x, int y){
+void Board::moveSelectedCheck(int x, int y, bool eat){
     Vector2D* p = selectedCheck->getPos();
+    if(abs(x-p->getX()) == 2 && board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check != nullptr){
+        board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check = nullptr;
+        if(eat)
+            checkRival--; 
+    }
     Check* c = board[(int)p->getX()][(int)p->getY()].check;
     board[(int)p->getX()][(int)p->getY()].check = nullptr;
     c->setPos(x,y);
@@ -147,6 +150,6 @@ void Board::processMovement(Vector2D* a, Vector2D* b) {
     selectedCheck = board[f][g].check;
     f = 7 - b->getX();
     g = 7 - b->getY();
-    moveSelectedCheck(f, g);
+    moveSelectedCheck(f, g, false);
     board[f][g].marked = true;
 }

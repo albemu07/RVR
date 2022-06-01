@@ -24,8 +24,7 @@ struct Cell{
 class Board {
     //Matriz casillas
     Cell board[8][8];
-    Check* whites[12];
-    Check* blacks[12];
+    int checkRival = 12;
     Check* selectedCheck = nullptr;
 public:
     Board();
@@ -45,7 +44,7 @@ public:
     }
 private:
     void markPossibleMoves(Vector2D pos);
-    void moveSelectedCheck(int x, int y);
+    void moveSelectedCheck(int x, int y, bool eat);
     void cleanNextMoves();
     InputHandler* in;
     SDLUtils* sdl;
