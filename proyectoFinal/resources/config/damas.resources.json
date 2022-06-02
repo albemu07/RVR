@@ -17,7 +17,8 @@
     { "id" : "lastMove", "file" : "resources/Assets/LastMove.png" },
     { "id" : "loseMenu", "file" : "resources/Assets/LooseMenu.png" },
     { "id" : "winMenu", "file" : "resources/Assets/WinMenu.png" },
-    { "id" : "initMenu", "file" : "resources/Assets/StartMenu.png" }
+    { "id" : "initMenu", "file" : "resources/Assets/StartMenu.png" },
+    { "id" : "interruptedMenu", "file" : "resources/Assets/InterruptedMenu.png" }
   ],
   
   "messages" : [

@@ -28,18 +28,18 @@ Game::~Game() {
 	// delete ips;
     // delete port;
 
-    delete sock;
-    delete other;
+    // delete sock;
+    // delete other;
 
-	delete in;
-    delete sdl;
-    delete b;
+	// delete in;
+    // delete sdl;
+    // delete b;
 }
 
 void Game::init()
 {
 	// Initialise the SDLGame singleton
-	SDLUtils::init("SDLGame Demo!", 800, 600,
+	SDLUtils::init("Chekers", 800, 600,
 				   "resources/config/damas.resources.json");
 
 	sdl = SDLUtils::instance();
@@ -110,7 +110,7 @@ void Game::gameLoop() {
 		}
 	}
 
-	if (!otherEnded){
+	if (!otherEnded && exit_){
 		infoMsg msg = infoMsg((int)msg.LOGOUT, 0, new Vector2D(0, 0), new Vector2D(0, 0), false);
 		if (sock->send(msg) == -1){
 			std::cout << "Error send: " << errno <<  "\n";
@@ -162,19 +162,19 @@ void Game::didIWin() {
 		auto &iniImg = sdl->images().at("winMenu");
 		iniImg.render(0,0);
 	}
-	else if (exit_){
-		auto &iniImg = sdl->images().at("initMenu");
+	else if (b->lose){
+		auto &iniImg = sdl->images().at("loseMenu");
 		iniImg.render(0,0);
 	}
 	else {
-		auto &iniImg = sdl->images().at("loseMenu");
+		auto &iniImg = sdl->images().at("interruptedMenu");
 		iniImg.render(0,0);
 	}
 
 	Texture pressAnyKey(renderer, "Press any key to exit",
 	sdl->fonts().at("ARIAL24"), build_sdlcolor(0x112233ff),
-	build_sdlcolor(0xffffffff));
-	pressAnyKey.render((sdl->width() - pressAnyKey.width()) / 2, (sdl->height() - pressAnyKey.height()) / 2);
+	build_sdlcolor(0xa17d6c00));
+	pressAnyKey.render((sdl->width() - pressAnyKey.width()) / 2, 2 * sdl->height() / 3 - pressAnyKey.height() / 2);
 	sdl->presentRenderer();
 	bool anykey = false;
 	while (!anykey) {

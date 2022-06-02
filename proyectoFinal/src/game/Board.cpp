@@ -90,20 +90,32 @@ void Board::markPossibleMoves(Vector2D p){
         for(int i=1; i<8 && (continA || continB || continC || continD); i++){
             if(continA && x-i >= 0 && y-i >= 0 && board[x-i][y-i].check == nullptr)
                 board[x-i][y-i].nextMove = true;          
-            else
+            else if(continA){
+                if(x-i-1 >= 0 && y-i-1 >= 0 && board[x-i-1][y-i-1].check == nullptr && board[x-i][y-i].check->color != selectedCheck->color)
+                    board[x-i-1][y-i-1].nextMove = true;
                 continA = false;
+            }
             if(continB && x+i < 8 && y-i >= 0 && board[x+i][y-i].check == nullptr)
                 board[x+i][y-i].nextMove = true;
-            else    
+            else if(continB){
+                if(x+i+1 < 8 && y-i-1 >= 0 && board[x+i+1][y-i-1].check == nullptr && board[x+i][y-i].check->color != selectedCheck->color)
+                    board[x+i+1][y-i-1].nextMove = true;
                 continB = false;
+            }
             if(continC && x-i >= 0 && y+i < 8 && board[x-i][y+i].check == nullptr)
                 board[x-i][y+i].nextMove = true;
-            else
-                continC = false;
+            else if(continC){
+                if(x-i-1 >= 0 && y+i+1 < 8 && board[x-i-1][y+i+1].check == nullptr && board[x-i][y+i].check->color != selectedCheck->color)
+                    board[x-i-1][y+i+1].nextMove = true;
+               continC = false;
+            }
             if(continD && x+i < 8 && y+i < 8 && board[x+i][y+i].check == nullptr)
                 board[x+i][y+i].nextMove = true;
-            else
+            else if(continD){
+                if(x+i+1 < 8 && y+i+1 < 8 && board[x+i+1][y+i+1].check == nullptr && board[x+i][y+i].check->color != selectedCheck->color)
+                    board[x+i+1][y+i+1].nextMove = true;
                 continD = false;
+            }
         }
     }
     else if(!selectedCheck->isQueen()){
@@ -135,15 +147,22 @@ void Board::cleanNextMoves(){
 void Board::moveSelectedCheck(int x, int y, bool eat){
     myTurn = false;
     Vector2D* p = selectedCheck->getPos();
-    if(abs(x-p->getX()) == 2 && board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check != nullptr){
-        board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check = nullptr;
-        if(eat){
-            myTurn = true;
-            checkRival--; 
-            if (checkRival == 0)
-                win = true;
+    Vector2D* dir = new Vector2D(x-p->getX(), y-p->getY());
+    //if(abs(x-p->getX()) == 2 && board[(int)((x+p->getX())/2)][(int)((y+p->getY())/2)].check != nullptr){
+    if(abs(dir->getX()) > 1){
+        dir->setX(dir->getX()/abs(dir->getX()));
+        dir->setY(dir->getY()/abs(dir->getY()));
+        if(  board[(int)(x-dir->getX())][(int)(y-dir->getY())].check != nullptr){
+            board[(int)(x-dir->getX())][(int)(y-dir->getY())].check = nullptr;
+            if(eat){
+                myTurn = true;
+                checkRival--; 
+                if (checkRival == 0)
+                    win = true;
+            }
         }
     }
+    
     Check* c = board[(int)p->getX()][(int)p->getY()].check;
     board[(int)p->getX()][(int)p->getY()].check = nullptr;
     c->setPos(x,y);
