@@ -13,7 +13,8 @@ public:
         LOGIN = 0,
         MOVEMENT = 1,
         LOGOUT = 2,
-        TIME = 3
+        TIME = 3,
+        WIN = 4
     };
 
     infoMsg(){};

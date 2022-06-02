@@ -85,7 +85,7 @@ void Game::gameLoop() {
 	exit_ = false;
 	b = new Board(createGame);
 	b->init();
-	while (!exit_)
+	while (!exit_ && !b->win && !b->lose)
 	{
 		Uint32 startTime = sdl->currRealTime();
 
@@ -96,10 +96,6 @@ void Game::gameLoop() {
 		if (movedCheck) {
 			movedCheck = false;
 			if (sendInfo() == -1)
-				return;
-		}
-		if (!b->myTurn){
-			if (recvInfo() == -1)
 				return;
 		}
 
@@ -124,12 +120,22 @@ void Game::gameLoop() {
 			return;
 		}
 	}
+
+	if (b->win) {
+		infoMsg msg = infoMsg((int)msg.WIN, 0, new Vector2D(0, 0), new Vector2D(0, 0), false);
+		if (sock->send(msg) == -1){
+			std::cout << "Error send: " << errno <<  "\n";
+			close(so);
+			if (createGame)
+				close(ot);
+			return;
+		}
+	}
 }
 
 void Game::exitLoop(){
-	while(true){
-		if (in->isKeyDown(SDLK_ESCAPE))
-			exit_ = true;
+	while(!exit_){
+		recvInfo();
 	}
 }
 
@@ -152,7 +158,7 @@ void Game::didIWin() {
 	} 
 
 	sdl->clearRenderer();
-	if (win){
+	if (b->win){
 		auto &iniImg = sdl->images().at("winMenu");
 		iniImg.render(0,0);
 	}
@@ -185,8 +191,8 @@ void Game::handleInput()
 	in->clearState();
 	in->refresh();
 
-	// if (in->isKeyDown(SDLK_ESCAPE))
-	// 	exit_ = true;
+	if (in->isKeyDown(SDLK_ESCAPE))
+		exit_ = true;
 	if (in->mouseButtonDownEvent() && b->myTurn)
 	{
 		if (in->getMouseButtonState(0))
@@ -303,6 +309,9 @@ int Game::recvInfo() {
 	}
 	else if (msg.getType() == msg.TIME){
 		enemyTime = msg.getTime();
+	}
+	else if (msg.getType() == msg.WIN){
+		b->lose = true;
 	}
 	return 0;
 }
