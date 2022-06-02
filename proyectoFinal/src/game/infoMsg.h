@@ -34,8 +34,8 @@ public:
     inline msgType getType(){
         return (msgType)type;
     }
-    inline msgType getTime(){
-        return (msgType)type;
+    inline uint32_t getTime(){
+        return timeLeft;
     }
 
 private:

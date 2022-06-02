@@ -2,6 +2,7 @@ make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/almufer/proyectoFinal'
  
 g++ -std=c++17 -Wall -g -o obj/main.o -c src/main.cpp
+ 
 g++ -std=c++17 -Wall -g -o obj/sdlutils/SoundEffect.o -c src/sdlutils/SoundEffect.cpp
 g++ -std=c++17 -Wall -g -o obj/sdlutils/Texture.o -c src/sdlutils/Texture.cpp
 g++ -std=c++17 -Wall -g -o obj/sdlutils/SDLUtils.o -c src/sdlutils/SDLUtils.cpp

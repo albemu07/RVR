@@ -25,8 +25,8 @@ Game::Game(char* s, char* p, char* isServer) {
 }
 
 Game::~Game() {
-	delete ips;
-    delete port;
+	// delete ips;
+    // delete port;
 
     delete sock;
     delete other;
@@ -108,8 +108,10 @@ void Game::gameLoop() {
 		if (frameTime < 20){
 			SDL_Delay(20 - frameTime);
 		}
-		myTime -= 20;
-		updateTime();
+		if (b->myTurn) {
+			myTime -= frameTime; 
+			updateTime();
+		}
 	}
 
 	if (!otherEnded){
@@ -122,10 +124,6 @@ void Game::gameLoop() {
 			return;
 		}
 	}
-	if (createGame){
-		close(so);
-		close(ot);
-	} 
 }
 
 void Game::exitLoop(){
@@ -148,6 +146,11 @@ int Game::updateTime() {
 }
 
 void Game::didIWin() {
+	if (createGame){
+		close(so);
+		close(ot);
+	} 
+
 	sdl->clearRenderer();
 	if (win){
 		auto &iniImg = sdl->images().at("sdl_logo");
@@ -169,6 +172,8 @@ void Game::didIWin() {
 	sdl->presentRenderer();
 	bool anykey = false;
 	while (!anykey) {
+		in->clearState();
+		in->refresh();
 		if (in->keyDownEvent())
 			anykey = true;
 	}
@@ -276,12 +281,10 @@ int Game::sendInfo() {
 			close(ot);
 		return -1;
 	}
-	std::cout << "Send bien\n";
 	return 0;
 }
 
 int Game::recvInfo() {
-	std::cout << "Waiting recv\n";
 	infoMsg msg = infoMsg();
 	if (sock->recv(msg) == -1) {
 		std::cout << "Error recv: " << errno <<  "\n";
@@ -290,7 +293,6 @@ int Game::recvInfo() {
 			close(ot);
 		return -1;
 	}
-	std::cout << "Recv bien\n";
 	if (msg.getType() == msg.MOVEMENT) {
 		b->processMovement(msg.getIniPos(), msg.getNewPos());
 		b->myTurn= !msg.getTurn();
