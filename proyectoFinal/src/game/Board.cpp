@@ -140,6 +140,8 @@ void Board::moveSelectedCheck(int x, int y, bool eat){
         if(eat){
             myTurn = true;
             checkRival--; 
+            if (checkRival == 0)
+                win = true;
         }
     }
     Check* c = board[(int)p->getX()][(int)p->getY()].check;

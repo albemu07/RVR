@@ -44,6 +44,8 @@ public:
     }
 
     bool myTurn = false;
+    bool win = false;
+    bool lose = false;
 private:
     void markPossibleMoves(Vector2D pos);
     void moveSelectedCheck(int x, int y, bool eat);

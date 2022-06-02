@@ -33,7 +33,6 @@ private:
     SDL_Renderer* renderer;
     Board* b;
     bool exit_ = false;
-    bool win = false;
     bool otherEnded = false;
     bool createGame = false;
 
