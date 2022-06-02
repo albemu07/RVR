@@ -14,7 +14,10 @@
     { "id" : "checkBlack", "file" : "resources/Assets/PeonNegro.png" },
     { "id" : "queenBlack", "file" : "resources/Assets/DamaNegra.png" },
     { "id" : "nextMove", "file" : "resources/Assets/NextMove.png" },
-    { "id" : "lastMove", "file" : "resources/Assets/LastMove.png" }
+    { "id" : "lastMove", "file" : "resources/Assets/LastMove.png" },
+    { "id" : "loseMenu", "file" : "resources/Assets/LooseMenu.png" },
+    { "id" : "winMenu", "file" : "resources/Assets/WinMenu.png" },
+    { "id" : "initMenu", "file" : "resources/Assets/StartMenu.png" }
   ],
   
   "messages" : [

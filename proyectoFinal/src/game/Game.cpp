@@ -52,9 +52,9 @@ void Game::init()
 
 	in = InputHandler::instance();
 
-	auto &iniImg = sdl->images().at("sdl_logo");
+	auto &iniImg = sdl->images().at("initMenu");
 	sdl->clearRenderer();
-	iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+	iniImg.render(0,0);
 	sdl->presentRenderer();
 
 	bool input = false;
@@ -153,16 +153,16 @@ void Game::didIWin() {
 
 	sdl->clearRenderer();
 	if (win){
-		auto &iniImg = sdl->images().at("sdl_logo");
-		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+		auto &iniImg = sdl->images().at("winMenu");
+		iniImg.render(0,0);
 	}
 	else if (exit_){
-		auto &iniImg = sdl->images().at("sdl_logo");
-		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+		auto &iniImg = sdl->images().at("initMenu");
+		iniImg.render(0,0);
 	}
 	else {
-		auto &iniImg = sdl->images().at("sdl_logo");
-		iniImg.render(sdl->width()/2 - iniImg.width()/2*SCALE, sdl->height()/2 - iniImg.height()/2*SCALE);
+		auto &iniImg = sdl->images().at("loseMenu");
+		iniImg.render(0,0);
 	}
 
 	Texture pressAnyKey(renderer, "Press any key to exit",
