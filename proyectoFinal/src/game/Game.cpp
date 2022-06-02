@@ -25,15 +25,11 @@ Game::Game(char* s, char* p, char* isServer) {
 }
 
 Game::~Game() {
-	// delete ips;
-    // delete port;
+	delete sock;
+	if(createGame)
+    	delete other;
 
-    // delete sock;
-    // delete other;
-
-	// delete in;
-    // delete sdl;
-    // delete b;
+    delete b;
 }
 
 void Game::init()
@@ -152,8 +148,8 @@ int Game::updateTime() {
 }
 
 void Game::didIWin() {
+	close(so);
 	if (createGame){
-		close(so);
 		close(ot);
 	} 
 

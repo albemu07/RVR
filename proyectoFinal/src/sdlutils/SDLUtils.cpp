@@ -73,10 +73,8 @@ void SDLUtils::initWindow() {
 void SDLUtils::closeWindow() {
 
 	// destroy renderer and window
-	std::cout << "EMpieca\n";
 	SDL_DestroyWindow(window_);
 	SDL_DestroyRenderer(renderer_);
-	std::cout << "Acabsdfa\n";
 
 	SDL_Quit(); // quit SDL
 }
